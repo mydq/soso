@@ -10,16 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kettle</groupId>
-    <artifactId>soso-mybatis-dal</artifactId>
+    <artifactId>soso-quartz</artifactId>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.mydq</groupId>
-            <artifactId>mybatis-generator-csz-ddd</artifactId>
         </dependency>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -44,7 +41,7 @@
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <configuration>
                     <configurationFile>
-                        D:\GitRepository\soso\soso-mybatis-dal\src\main\resources\generatorMybatis-mysql.xml
+                        D:\GitRepository\soso\soso-quartz\src\main\resources\generatorMybatis-mysql.xml
                     </configurationFile>
                     <overwrite>true</overwrite>
                     <verbose>true</verbose>
@@ -59,5 +56,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

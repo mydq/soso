@@ -14,19 +14,19 @@
     <!-- 生成一对一配置 不建议使用-->
     <!--<plugin type="org.asia.mybatis.generator.plugins.OneToOnePlugin"/>-->
     <!--Core分页插件-->
-    <!--<plugin type="org.asia.mybatis.generator.plugins.PaginationPlugin" />-->
+    <plugin type="org.asia.mybatis.generator.plugins.PaginationPlugin" />
     <!--DDD 领域模型分页插件-->
-    <plugin type="org.asia.mybatis.generator.plugins.MySqlPaginationPlugin" />
+    <!--<plugin type="org.asia.mybatis.generator.plugins.MySqlPaginationPlugin" />-->
     <plugin type="org.asia.mybatis.generator.plugins.BatchInsertPlugin" />
     <!--批量更新，需要在数据库连接配置上，加入allowMultiQueries=true -->
     <plugin type="org.asia.mybatis.generator.plugins.BatchUpdatePlugin" />
     <!--序列化插件-->
     <plugin type="org.asia.mybatis.generator.plugins.SerializablePlugin" />
-    <plugin type="org.asia.mybatis.generator.plugins.BoPlugin" >
-        <!-- BO 模块位置 -->
-        <property name="basePath"
-                  value="D:\GitRepository\soso\soso-mybatis-dal\src\main\java"/>
-    </plugin>
+    <!--<plugin type="org.asia.mybatis.generator.plugins.BoPlugin" >-->
+         <!--BO 模块位置 -->
+        <!--<property name="basePath"-->
+                  <!--value="D:\GitRepository\soso\soso-mybatis-dal\src\main\java"/>-->
+    <!--</plugin>-->
 
     <!--<commentGenerator >-->
     <!--<property name="suppressDate" value="true"/>-->
@@ -41,7 +41,7 @@
 
 	<!-- 数据库链接 自己根据环境配置 -->
      <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                     connectionURL="jdbc:mysql://localhost:3306/hs_credit" userId="root" password="root"/>
+                     connectionURL="jdbc:mysql://localhost:3306/quartz" userId="root" password="root"/>
 
     
     <!--<javaTypeResolver type="test.MyJavaTypeResolverDefaultImpl">-->
@@ -53,34 +53,34 @@
 
   
 	<!-- model生成  targetPackage为生成的包名  targetProject为文件所生成的目录-->
-    <javaModelGenerator targetPackage="com.kettle.soso.mybatis.dal.model" targetProject="D:\GitRepository\soso\soso-mybatis-dal\src\main\java">
+    <javaModelGenerator targetPackage="com.kettle.soso.quartz.model" targetProject="D:\GitRepository\soso\soso-quartz\src\main\java">
         <property name="enableSubPackages" value="true" />
         <property name="trimStrings" value="true" />
     </javaModelGenerator>
 
 	<!-- mapperXML配置文件生成 -->
-    <sqlMapGenerator targetPackage="com.kettle.soso.mybatis.dal.mapper" targetProject="D:\GitRepository\soso\soso-mybatis-dal\src\main\resources">
+    <sqlMapGenerator targetPackage="com.kettle.soso.quartz.mapper" targetProject="D:\GitRepository\soso\soso-quartz\src\main\resources">
         <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
    <!-- mapper接口生成 -->
-    <javaClientGenerator type="XMLMAPPER" targetPackage="com.kettle.soso.mybatis.dal.mapper"  targetProject="D:\GitRepository\soso\soso-mybatis-dal\src\main\java">
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.kettle.soso.quartz.mapper"  targetProject="D:\GitRepository\soso\soso-quartz\src\main\java">
         <property name="enableSubPackages" value="true" />
     </javaClientGenerator>
 
 
 	 <!--配置要生成mybatis 相关对象的表 -->
-        <table schema="root" tableName="credit_organization" domainObjectName="CreditOrganization" >
+    <table schema="root" tableName="qrtz_calendars" domainObjectName="Calendars" >
         <!-- 充血模型中，Bo与Do一一对应，这里指定Bo包名，用于生成getBo方法 -->
-        <property name="boPackage" value="com.kettle.soso.mybatis.dal.bo"/>
+        <!--<property name="boPackage" value="com.kettle.soso.mybatis.dal.bo"/>-->
         <property name="useActualColumnNames" value="false"/>
-        <generatedKey column="ID" sqlStatement="MySql" identity="true" />
-        <ignoreColumn column="ID"/>
-        <ignoreColumn column="GMT_CREATE"/>
-        <ignoreColumn column="GMT_MODIFIED"/>
-        <ignoreColumn column="CREATOR"/>
-        <ignoreColumn column="MODIFIER"/>
-        <ignoreColumn column="IS_DELETED"/>
+        <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        <!--<ignoreColumn column="ID"/>-->
+        <!--<ignoreColumn column="GMT_CREATE"/>-->
+        <!--<ignoreColumn column="GMT_MODIFIED"/>-->
+        <!--<ignoreColumn column="CREATOR"/>-->
+        <!--<ignoreColumn column="MODIFIER"/>-->
+        <!--<ignoreColumn column="IS_DELETED"/>-->
         <!--&lt;!&ndash;数据库类型原为text&ndash;&gt;-->
         <!--<columnOverride column="content01" property="content01"-->
                         <!--javaType="java.lang.String" jdbcType="VARCHAR" />-->

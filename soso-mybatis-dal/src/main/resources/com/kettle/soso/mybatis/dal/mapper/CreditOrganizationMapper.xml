@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kettle.soso.mybatis.dal.mapper.CreditOrganizationMapperExt">
+  <resultMap id="BaseResultMap" type="com.kettle.soso.mybatis.dal.model.CreditOrganization">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
+    <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
+    <result column="organization_principal" jdbcType="VARCHAR" property="organizationPrincipal" />
+    <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
+    <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="MODIFIER" jdbcType="VARCHAR" property="modifier" />
+    <result column="IS_DELETED" jdbcType="CHAR" property="isDeleted" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, key, organization_code, organization_name, organization_principal, GMT_CREATE, 
+    CREATOR, GMT_MODIFIED, MODIFIER, IS_DELETED
+  </sql>
+  <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganizationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    <include refid="MysqlDialectPrefix" />
+    from credit_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="oredCriteria.size != 0">
+      <choose>
+        <when test="oredCriteria.size == 1 and !oredCriteria[0].valid">
+          where is_deleted = 'n'
+        </when>
+        <otherwise>
+          and is_deleted = 'n'
+        </otherwise>
+      </choose>
+    </if>
+    <if test="oredCriteria.size == 0">
+      where is_deleted = 'n'
+    </if>
+    <include refid="fullOrgPath" />
+    <include refid="owner" />
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="MysqlDialectSuffix" />
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from credit_organization
+    where ID = #{id,jdbcType=INTEGER}
+    and is_deleted = 'n'
+  </select>
+  <update id="deleteByPrimaryKey" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganization">
+    delete from credit_organization
+    where ID = #{id,jdbcType=INTEGER}
+    update credit_organization set is_deleted = 'y',modifier=#{modifier,jdbcType=VARCHAR},gmt_Modified=current_timestamp where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganizationExample">
+    delete from credit_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <select id="countByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganizationExample" resultType="java.lang.Integer">
+    select count(*) from credit_organization
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="oredCriteria.size != 0">
+      <choose>
+        <when test="oredCriteria.size == 1 and !oredCriteria[0].valid">
+          where is_deleted = 'n'
+        </when>
+        <otherwise>
+          and is_deleted = 'n'
+        </otherwise>
+      </choose>
+    </if>
+    <if test="oredCriteria.size == 0">
+      where is_deleted = 'n'
+    </if>
+    <include refid="fullOrgPath" />
+    <include refid="owner" />
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update credit_organization
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.key != null">
+        key = #{record.key,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationCode != null">
+        organization_code = #{record.organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationName != null">
+        organization_name = #{record.organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organizationPrincipal != null">
+        organization_principal = #{record.organizationPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmtCreate != null">
+        GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null">
+        CREATOR = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gmtModified != null">
+        GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifier != null">
+        MODIFIER = #{record.modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null">
+        IS_DELETED = #{record.isDeleted,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update credit_organization
+    set ID = #{record.id,jdbcType=INTEGER},
+      key = #{record.key,jdbcType=VARCHAR},
+      organization_code = #{record.organizationCode,jdbcType=VARCHAR},
+      organization_name = #{record.organizationName,jdbcType=VARCHAR},
+      organization_principal = #{record.organizationPrincipal,jdbcType=VARCHAR},
+      GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      CREATOR = #{record.creator,jdbcType=VARCHAR},
+      GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
+      MODIFIER = #{record.modifier,jdbcType=VARCHAR},
+      IS_DELETED = #{record.isDeleted,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganization">
+    update credit_organization
+    <set>
+      <if test="key != null">
+        key = #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        organization_code = #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationName != null">
+        organization_name = #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPrincipal != null">
+        organization_principal = #{organizationPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtModified != null">
+        GMT_MODIFIED = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified == null">
+        GMT_MODIFIED = current_timestamp,
+      </if>
+      <if test="modifier != null">
+        MODIFIER = #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="modifier == null">
+        MODIFIER = 'system',
+      </if>
+      <if test="isDeleted != null">
+        IS_DELETED = #{isDeleted,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+    and is_deleted = 'n'
+  </update>
+  <insert id="insertSelective" keyProperty="id" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganization" useGeneratedKeys="true">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into credit_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      ID,
+      <if test="isDeleted == null">
+        IS_DELETED,
+      </if>
+      <if test="creator == null">
+        CREATOR,
+      </if>
+      <if test="modifier == null">
+        MODIFIER,
+      </if>
+      <if test="gmtModified == null">
+        GMT_MODIFIED,
+      </if>
+      <if test="gmtCreate == null">
+        GMT_CREATE,
+      </if>
+      <if test="key != null">
+        key,
+      </if>
+      <if test="organizationCode != null">
+        organization_code,
+      </if>
+      <if test="organizationName != null">
+        organization_name,
+      </if>
+      <if test="organizationPrincipal != null">
+        organization_principal,
+      </if>
+      <if test="gmtCreate != null">
+        GMT_CREATE,
+      </if>
+      <if test="creator != null">
+        CREATOR,
+      </if>
+      <if test="gmtModified != null">
+        GMT_MODIFIED,
+      </if>
+      <if test="modifier != null">
+        MODIFIER,
+      </if>
+      <if test="isDeleted != null">
+        IS_DELETED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{id,jdbcType=INTEGER},
+      <if test="isDeleted == null">
+        'n',
+      </if>
+      <if test="creator == null">
+        'system',
+      </if>
+      <if test="modifier == null">
+        'system',
+      </if>
+      <if test="gmtModified == null">
+        current_timestamp,
+      </if>
+      <if test="gmtCreate == null">
+        current_timestamp,
+      </if>
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationCode != null">
+        #{organizationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationName != null">
+        #{organizationName,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationPrincipal != null">
+        #{organizationPrincipal,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifier != null">
+        #{modifier,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <sql id="MysqlDialectPrefix">
+    <if test="page != null">
+      from credit_organization where id in ( select id from ( select id 
+    </if>
+  </sql>
+  <sql id="MysqlDialectSuffix">
+    <if test="page != null">
+      <![CDATA[ limit #{page.begin}, #{page.length} ) as temp_page_table) ]]>
+    </if>
+  </sql>
+  <sql id="fullOrgPath">
+    <if test="fullOrgPath != null">
+      and full_org_path like CONCAT(#{fullOrgPath}, '%')
+    </if>
+  </sql>
+  <sql id="owner">
+    <if test="owner != null">
+      and owner =#{owner,jdbcType=VARCHAR}
+    </if>
+  </sql>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into credit_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        ID,
+      </if>
+      <if test="list[0].key!=null">
+        key,
+      </if>
+      <if test="list[0].organizationCode!=null">
+        organization_code,
+      </if>
+      <if test="list[0].organizationName!=null">
+        organization_name,
+      </if>
+      <if test="list[0].organizationPrincipal!=null">
+        organization_principal,
+      </if>
+      <if test="list[0].gmtCreate!=null">
+        GMT_CREATE,
+      </if>
+      <if test="list[0].creator!=null">
+        CREATOR,
+      </if>
+      <if test="list[0].gmtModified!=null">
+        GMT_MODIFIED,
+      </if>
+      <if test="list[0].modifier!=null">
+        MODIFIER,
+      </if>
+      <if test="list[0].isDeleted!=null">
+        IS_DELETED,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=INTEGER},
+        </if>
+        <if test="item.key!=null">
+          #{item.key,jdbcType=VARCHAR},
+        </if>
+        <if test="item.organizationCode!=null">
+          #{item.organizationCode,jdbcType=VARCHAR},
+        </if>
+        <if test="item.organizationName!=null">
+          #{item.organizationName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.organizationPrincipal!=null">
+          #{item.organizationPrincipal,jdbcType=VARCHAR},
+        </if>
+        <if test="item.gmtCreate!=null">
+          #{item.gmtCreate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.creator!=null">
+          #{item.creator,jdbcType=VARCHAR},
+        </if>
+        <if test="item.gmtModified!=null">
+          #{item.gmtModified,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.modifier!=null">
+          #{item.modifier,jdbcType=VARCHAR},
+        </if>
+        <if test="item.isDeleted!=null">
+          #{item.isDeleted,jdbcType=CHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update credit_organization
+      <set>
+        <if test="item.key!=null">
+          key=#{item.key,jdbcType=VARCHAR},
+        </if>
+        <if test="item.organizationCode!=null">
+          organization_code=#{item.organizationCode,jdbcType=VARCHAR},
+        </if>
+        <if test="item.organizationName!=null">
+          organization_name=#{item.organizationName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.organizationPrincipal!=null">
+          organization_principal=#{item.organizationPrincipal,jdbcType=VARCHAR},
+        </if>
+        <if test="item.gmtCreate!=null">
+          GMT_CREATE=#{item.gmtCreate,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.creator!=null">
+          CREATOR=#{item.creator,jdbcType=VARCHAR},
+        </if>
+        <if test="item.gmtModified!=null">
+          GMT_MODIFIED=#{item.gmtModified,jdbcType=TIMESTAMP},
+        </if>
+        <if test="item.modifier!=null">
+          MODIFIER=#{item.modifier,jdbcType=VARCHAR},
+        </if>
+        <if test="item.isDeleted!=null">
+          IS_DELETED=#{item.isDeleted,jdbcType=CHAR},
+        </if>
+      </set>
+      where 
+      ID = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
+</mapper>

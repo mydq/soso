@@ -11,6 +11,7 @@ import org.quartz.JobExecutionException;
 public class HelloWorldTask implements BaseJob {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        jobExecutionContext.getJobDetail();
         System.out.println("这是第一个任务");
     }
 }

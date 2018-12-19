@@ -87,4 +87,7 @@ spring:
   #    jdbc:
   #      initialize-schema: never
 
+document:
+  path: C:/temp/documents
+
 

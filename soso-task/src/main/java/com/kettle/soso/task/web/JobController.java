@@ -17,7 +17,7 @@ public class JobController {
     @Autowired
     private JobAndTriggerService jobAndTriggerService;
 
-    @RequestMapping(value = "addJob", method = RequestMethod.GET)
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String addJob(String jobName, String groupName, String cron){
         String message = null;
         try {

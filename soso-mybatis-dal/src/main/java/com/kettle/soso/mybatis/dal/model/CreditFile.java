@@ -6,9 +6,9 @@ import org.beans.GogoDo;
 public class CreditFile extends GogoDo implements Serializable {
     /**
      * 生成主键
-     * 表字段 : credit_file.key
+     * 表字段 : credit_file.uuid
      */
-    private String key;
+    private String uuid;
 
     /**
      * 文件原始名称
@@ -41,6 +41,12 @@ public class CreditFile extends GogoDo implements Serializable {
     private String fileType;
 
     /**
+     * 文件大小
+     * 表字段 : credit_file.size
+     */
+    private Integer size;
+
+    /**
      * 文件校验值
      * 表字段 : credit_file.verify_md5
      */
@@ -55,21 +61,21 @@ public class CreditFile extends GogoDo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 获取 生成主键 字段:credit_file.key
+     * 获取 生成主键 字段:credit_file.uuid
      *
-     * @return credit_file.key, 生成主键
+     * @return credit_file.uuid, 生成主键
      */
-    public String getKey() {
-        return key;
+    public String getUuid() {
+        return uuid;
     }
 
     /**
-     * 设置 生成主键 字段:credit_file.key
+     * 设置 生成主键 字段:credit_file.uuid
      *
-     * @param key the value for credit_file.key, 生成主键
+     * @param uuid the value for credit_file.uuid, 生成主键
      */
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+    public void setUuid(String uuid) {
+        this.uuid = uuid == null ? null : uuid.trim();
     }
 
     /**
@@ -160,6 +166,24 @@ public class CreditFile extends GogoDo implements Serializable {
      */
     public void setFileType(String fileType) {
         this.fileType = fileType == null ? null : fileType.trim();
+    }
+
+    /**
+     * 获取 文件大小 字段:credit_file.size
+     *
+     * @return credit_file.size, 文件大小
+     */
+    public Integer getSize() {
+        return size;
+    }
+
+    /**
+     * 设置 文件大小 字段:credit_file.size
+     *
+     * @param size the value for credit_file.size, 文件大小
+     */
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
     /**

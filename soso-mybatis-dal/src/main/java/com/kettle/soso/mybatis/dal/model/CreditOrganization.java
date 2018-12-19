@@ -6,9 +6,9 @@ import org.beans.GogoDo;
 public class CreditOrganization extends GogoDo implements Serializable {
     /**
      * 生成主键
-     * 表字段 : credit_organization.key
+     * 表字段 : credit_organization.uuid
      */
-    private String key;
+    private String uuid;
 
     /**
      * 组织代号
@@ -37,21 +37,21 @@ public class CreditOrganization extends GogoDo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 获取 生成主键 字段:credit_organization.key
+     * 获取 生成主键 字段:credit_organization.uuid
      *
-     * @return credit_organization.key, 生成主键
+     * @return credit_organization.uuid, 生成主键
      */
-    public String getKey() {
-        return key;
+    public String getUuid() {
+        return uuid;
     }
 
     /**
-     * 设置 生成主键 字段:credit_organization.key
+     * 设置 生成主键 字段:credit_organization.uuid
      *
-     * @param key the value for credit_organization.key, 生成主键
+     * @param uuid the value for credit_organization.uuid, 生成主键
      */
-    public void setKey(String key) {
-        this.key = key == null ? null : key.trim();
+    public void setUuid(String uuid) {
+        this.uuid = uuid == null ? null : uuid.trim();
     }
 
     /**

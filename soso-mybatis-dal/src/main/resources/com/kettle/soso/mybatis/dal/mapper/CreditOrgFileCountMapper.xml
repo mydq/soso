@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kettle.soso.mybatis.dal.mapper.CreditFileMapperExt">
-  <resultMap id="BaseResultMap" type="com.kettle.soso.mybatis.dal.model.CreditFile">
+<mapper namespace="com.kettle.soso.mybatis.dal.mapper.CreditOrgFileCountMapperExt">
+  <resultMap id="BaseResultMap" type="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="file_old_name" jdbcType="VARCHAR" property="fileOldName" />
-    <result column="file_new_name" jdbcType="VARCHAR" property="fileNewName" />
-    <result column="file_path" jdbcType="VARCHAR" property="filePath" />
-    <result column="file_suffix" jdbcType="VARCHAR" property="fileSuffix" />
-    <result column="file_type" jdbcType="VARCHAR" property="fileType" />
-    <result column="size" jdbcType="INTEGER" property="size" />
-    <result column="verify_md5" jdbcType="VARCHAR" property="verifyMd5" />
+    <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
+    <result column="count" jdbcType="INTEGER" property="count" />
     <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
     <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -76,17 +71,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, uuid, file_old_name, file_new_name, file_path, file_suffix, file_type, size, 
-    verify_md5, GMT_CREATE, CREATOR, GMT_MODIFIED, MODIFIER, IS_DELETED
+    ID, uuid, organization_code, count, GMT_CREATE, CREATOR, GMT_MODIFIED, MODIFIER, 
+    IS_DELETED
   </sql>
-  <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditFileExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCountExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     <include refid="MysqlDialectPrefix" />
-    from credit_file
+    from credit_org_file_count
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -113,23 +108,23 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from credit_file
+    from credit_org_file_count
     where ID = #{id,jdbcType=INTEGER}
     and is_deleted = 'n'
   </select>
-  <update id="deleteByPrimaryKey" parameterType="com.kettle.soso.mybatis.dal.model.CreditFile">
-    delete from credit_file
+  <update id="deleteByPrimaryKey" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount">
+    delete from credit_org_file_count
     where ID = #{id,jdbcType=INTEGER}
-    update credit_file set is_deleted = 'y',modifier=#{modifier,jdbcType=VARCHAR},gmt_Modified=current_timestamp where ID = #{id,jdbcType=BIGINT}
+    update credit_org_file_count set is_deleted = 'y',modifier=#{modifier,jdbcType=VARCHAR},gmt_Modified=current_timestamp where ID = #{id,jdbcType=BIGINT}
   </update>
-  <delete id="deleteByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditFileExample">
-    delete from credit_file
+  <delete id="deleteByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCountExample">
+    delete from credit_org_file_count
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditFileExample" resultType="java.lang.Integer">
-    select count(*) from credit_file
+  <select id="countByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCountExample" resultType="java.lang.Integer">
+    select count(*) from credit_org_file_count
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -150,7 +145,7 @@
     <include refid="owner" />
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update credit_file
+    update credit_org_file_count
     <set>
       <if test="record.id != null">
         ID = #{record.id,jdbcType=INTEGER},
@@ -158,26 +153,11 @@
       <if test="record.uuid != null">
         uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.fileOldName != null">
-        file_old_name = #{record.fileOldName,jdbcType=VARCHAR},
+      <if test="record.organizationCode != null">
+        organization_code = #{record.organizationCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.fileNewName != null">
-        file_new_name = #{record.fileNewName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.filePath != null">
-        file_path = #{record.filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fileSuffix != null">
-        file_suffix = #{record.fileSuffix,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fileType != null">
-        file_type = #{record.fileType,jdbcType=VARCHAR},
-      </if>
-      <if test="record.size != null">
-        size = #{record.size,jdbcType=INTEGER},
-      </if>
-      <if test="record.verifyMd5 != null">
-        verify_md5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      <if test="record.count != null">
+        count = #{record.count,jdbcType=INTEGER},
       </if>
       <if test="record.gmtCreate != null">
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -200,16 +180,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update credit_file
+    update credit_org_file_count
     set ID = #{record.id,jdbcType=INTEGER},
       uuid = #{record.uuid,jdbcType=VARCHAR},
-      file_old_name = #{record.fileOldName,jdbcType=VARCHAR},
-      file_new_name = #{record.fileNewName,jdbcType=VARCHAR},
-      file_path = #{record.filePath,jdbcType=VARCHAR},
-      file_suffix = #{record.fileSuffix,jdbcType=VARCHAR},
-      file_type = #{record.fileType,jdbcType=VARCHAR},
-      size = #{record.size,jdbcType=INTEGER},
-      verify_md5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      organization_code = #{record.organizationCode,jdbcType=VARCHAR},
+      count = #{record.count,jdbcType=INTEGER},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       CREATOR = #{record.creator,jdbcType=VARCHAR},
       GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
@@ -219,32 +194,17 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.kettle.soso.mybatis.dal.model.CreditFile">
-    update credit_file
+  <update id="updateByPrimaryKeySelective" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount">
+    update credit_org_file_count
     <set>
       <if test="uuid != null">
         uuid = #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="fileOldName != null">
-        file_old_name = #{fileOldName,jdbcType=VARCHAR},
+      <if test="organizationCode != null">
+        organization_code = #{organizationCode,jdbcType=VARCHAR},
       </if>
-      <if test="fileNewName != null">
-        file_new_name = #{fileNewName,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null">
-        file_path = #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="fileSuffix != null">
-        file_suffix = #{fileSuffix,jdbcType=VARCHAR},
-      </if>
-      <if test="fileType != null">
-        file_type = #{fileType,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        size = #{size,jdbcType=INTEGER},
-      </if>
-      <if test="verifyMd5 != null">
-        verify_md5 = #{verifyMd5,jdbcType=VARCHAR},
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -271,11 +231,11 @@
     where ID = #{id,jdbcType=INTEGER}
     and is_deleted = 'n'
   </update>
-  <insert id="insertSelective" keyProperty="id" parameterType="com.kettle.soso.mybatis.dal.model.CreditFile" useGeneratedKeys="true">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount" useGeneratedKeys="true">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into credit_file
+    insert into credit_org_file_count
     <trim prefix="(" suffix=")" suffixOverrides=",">
       ID,
       <if test="isDeleted == null">
@@ -296,26 +256,11 @@
       <if test="uuid != null">
         uuid,
       </if>
-      <if test="fileOldName != null">
-        file_old_name,
+      <if test="organizationCode != null">
+        organization_code,
       </if>
-      <if test="fileNewName != null">
-        file_new_name,
-      </if>
-      <if test="filePath != null">
-        file_path,
-      </if>
-      <if test="fileSuffix != null">
-        file_suffix,
-      </if>
-      <if test="fileType != null">
-        file_type,
-      </if>
-      <if test="size != null">
-        size,
-      </if>
-      <if test="verifyMd5 != null">
-        verify_md5,
+      <if test="count != null">
+        count,
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE,
@@ -353,26 +298,11 @@
       <if test="uuid != null">
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="fileOldName != null">
-        #{fileOldName,jdbcType=VARCHAR},
+      <if test="organizationCode != null">
+        #{organizationCode,jdbcType=VARCHAR},
       </if>
-      <if test="fileNewName != null">
-        #{fileNewName,jdbcType=VARCHAR},
-      </if>
-      <if test="filePath != null">
-        #{filePath,jdbcType=VARCHAR},
-      </if>
-      <if test="fileSuffix != null">
-        #{fileSuffix,jdbcType=VARCHAR},
-      </if>
-      <if test="fileType != null">
-        #{fileType,jdbcType=VARCHAR},
-      </if>
-      <if test="size != null">
-        #{size,jdbcType=INTEGER},
-      </if>
-      <if test="verifyMd5 != null">
-        #{verifyMd5,jdbcType=VARCHAR},
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -393,7 +323,7 @@
   </insert>
   <sql id="MysqlDialectPrefix">
     <if test="page != null">
-      from credit_file where id in ( select id from ( select id 
+      from credit_org_file_count where id in ( select id from ( select id 
     </if>
   </sql>
   <sql id="MysqlDialectSuffix">
@@ -412,7 +342,7 @@
     </if>
   </sql>
   <insert id="insertBatchSelective" parameterType="java.util.List">
-    insert into credit_file
+    insert into credit_org_file_count
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="list[0].id!=null">
         ID,
@@ -420,26 +350,11 @@
       <if test="list[0].uuid!=null">
         uuid,
       </if>
-      <if test="list[0].fileOldName!=null">
-        file_old_name,
+      <if test="list[0].organizationCode!=null">
+        organization_code,
       </if>
-      <if test="list[0].fileNewName!=null">
-        file_new_name,
-      </if>
-      <if test="list[0].filePath!=null">
-        file_path,
-      </if>
-      <if test="list[0].fileSuffix!=null">
-        file_suffix,
-      </if>
-      <if test="list[0].fileType!=null">
-        file_type,
-      </if>
-      <if test="list[0].size!=null">
-        size,
-      </if>
-      <if test="list[0].verifyMd5!=null">
-        verify_md5,
+      <if test="list[0].count!=null">
+        count,
       </if>
       <if test="list[0].gmtCreate!=null">
         GMT_CREATE,
@@ -466,26 +381,11 @@
         <if test="item.uuid!=null">
           #{item.uuid,jdbcType=VARCHAR},
         </if>
-        <if test="item.fileOldName!=null">
-          #{item.fileOldName,jdbcType=VARCHAR},
+        <if test="item.organizationCode!=null">
+          #{item.organizationCode,jdbcType=VARCHAR},
         </if>
-        <if test="item.fileNewName!=null">
-          #{item.fileNewName,jdbcType=VARCHAR},
-        </if>
-        <if test="item.filePath!=null">
-          #{item.filePath,jdbcType=VARCHAR},
-        </if>
-        <if test="item.fileSuffix!=null">
-          #{item.fileSuffix,jdbcType=VARCHAR},
-        </if>
-        <if test="item.fileType!=null">
-          #{item.fileType,jdbcType=VARCHAR},
-        </if>
-        <if test="item.size!=null">
-          #{item.size,jdbcType=INTEGER},
-        </if>
-        <if test="item.verifyMd5!=null">
-          #{item.verifyMd5,jdbcType=VARCHAR},
+        <if test="item.count!=null">
+          #{item.count,jdbcType=INTEGER},
         </if>
         <if test="item.gmtCreate!=null">
           #{item.gmtCreate,jdbcType=TIMESTAMP},
@@ -507,31 +407,16 @@
   </insert>
   <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
     <foreach collection="list" index="index" item="item" separator=";">
-      update credit_file
+      update credit_org_file_count
       <set>
         <if test="item.uuid!=null">
           uuid=#{item.uuid,jdbcType=VARCHAR},
         </if>
-        <if test="item.fileOldName!=null">
-          file_old_name=#{item.fileOldName,jdbcType=VARCHAR},
+        <if test="item.organizationCode!=null">
+          organization_code=#{item.organizationCode,jdbcType=VARCHAR},
         </if>
-        <if test="item.fileNewName!=null">
-          file_new_name=#{item.fileNewName,jdbcType=VARCHAR},
-        </if>
-        <if test="item.filePath!=null">
-          file_path=#{item.filePath,jdbcType=VARCHAR},
-        </if>
-        <if test="item.fileSuffix!=null">
-          file_suffix=#{item.fileSuffix,jdbcType=VARCHAR},
-        </if>
-        <if test="item.fileType!=null">
-          file_type=#{item.fileType,jdbcType=VARCHAR},
-        </if>
-        <if test="item.size!=null">
-          size=#{item.size,jdbcType=INTEGER},
-        </if>
-        <if test="item.verifyMd5!=null">
-          verify_md5=#{item.verifyMd5,jdbcType=VARCHAR},
+        <if test="item.count!=null">
+          count=#{item.count,jdbcType=INTEGER},
         </if>
         <if test="item.gmtCreate!=null">
           GMT_CREATE=#{item.gmtCreate,jdbcType=TIMESTAMP},

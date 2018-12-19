@@ -177,73 +177,73 @@ public class CreditOrganizationExample extends GogoExample implements Serializab
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andKeyIsNull() {
-            addCriterion("key is null");
+        public Criteria andUuidIsNull() {
+            addCriterion("uuid is null");
             return (Criteria) this;
         }
 
-        public Criteria andKeyIsNotNull() {
-            addCriterion("key is not null");
+        public Criteria andUuidIsNotNull() {
+            addCriterion("uuid is not null");
             return (Criteria) this;
         }
 
-        public Criteria andKeyEqualTo(String value) {
-            addCriterion("key =", value, "key");
+        public Criteria andUuidEqualTo(String value) {
+            addCriterion("uuid =", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotEqualTo(String value) {
-            addCriterion("key <>", value, "key");
+        public Criteria andUuidNotEqualTo(String value) {
+            addCriterion("uuid <>", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyGreaterThan(String value) {
-            addCriterion("key >", value, "key");
+        public Criteria andUuidGreaterThan(String value) {
+            addCriterion("uuid >", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyGreaterThanOrEqualTo(String value) {
-            addCriterion("key >=", value, "key");
+        public Criteria andUuidGreaterThanOrEqualTo(String value) {
+            addCriterion("uuid >=", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyLessThan(String value) {
-            addCriterion("key <", value, "key");
+        public Criteria andUuidLessThan(String value) {
+            addCriterion("uuid <", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyLessThanOrEqualTo(String value) {
-            addCriterion("key <=", value, "key");
+        public Criteria andUuidLessThanOrEqualTo(String value) {
+            addCriterion("uuid <=", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyLike(String value) {
-            addCriterion("key like", value, "key");
+        public Criteria andUuidLike(String value) {
+            addCriterion("uuid like", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotLike(String value) {
-            addCriterion("key not like", value, "key");
+        public Criteria andUuidNotLike(String value) {
+            addCriterion("uuid not like", value, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyIn(List<String> values) {
-            addCriterion("key in", values, "key");
+        public Criteria andUuidIn(List<String> values) {
+            addCriterion("uuid in", values, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotIn(List<String> values) {
-            addCriterion("key not in", values, "key");
+        public Criteria andUuidNotIn(List<String> values) {
+            addCriterion("uuid not in", values, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyBetween(String value1, String value2) {
-            addCriterion("key between", value1, value2, "key");
+        public Criteria andUuidBetween(String value1, String value2) {
+            addCriterion("uuid between", value1, value2, "uuid");
             return (Criteria) this;
         }
 
-        public Criteria andKeyNotBetween(String value1, String value2) {
-            addCriterion("key not between", value1, value2, "key");
+        public Criteria andUuidNotBetween(String value1, String value2) {
+            addCriterion("uuid not between", value1, value2, "uuid");
             return (Criteria) this;
         }
 

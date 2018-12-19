@@ -4,7 +4,7 @@ import com.kettle.soso.mybatis.dal.DruidConfiguration;
 import com.kettle.soso.mybatis.dal.MybatisConfigOne;
 import com.kettle.soso.mybatis.dal.MybatisConfigTwo;
 import com.kettle.soso.restful.WebConfiguration;
-import com.kettle.soso.service.files.ServiceConfiguration;
+import com.kettle.soso.service.ServiceConfiguration;
 import com.kettle.soso.task.SchedulerConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

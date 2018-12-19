@@ -3,7 +3,7 @@
 <mapper namespace="com.kettle.soso.mybatis.dal.mapper.CreditOrganizationMapperExt">
   <resultMap id="BaseResultMap" type="com.kettle.soso.mybatis.dal.model.CreditOrganization">
     <id column="ID" jdbcType="INTEGER" property="id" />
-    <result column="key" jdbcType="VARCHAR" property="key" />
+    <result column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
     <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
     <result column="organization_principal" jdbcType="VARCHAR" property="organizationPrincipal" />
@@ -72,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, key, organization_code, organization_name, organization_principal, GMT_CREATE, 
+    ID, uuid, organization_code, organization_name, organization_principal, GMT_CREATE, 
     CREATOR, GMT_MODIFIED, MODIFIER, IS_DELETED
   </sql>
   <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganizationExample" resultMap="BaseResultMap">
@@ -151,8 +151,8 @@
       <if test="record.id != null">
         ID = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.key != null">
-        key = #{record.key,jdbcType=VARCHAR},
+      <if test="record.uuid != null">
+        uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
       <if test="record.organizationCode != null">
         organization_code = #{record.organizationCode,jdbcType=VARCHAR},
@@ -186,7 +186,7 @@
   <update id="updateByExample" parameterType="map">
     update credit_organization
     set ID = #{record.id,jdbcType=INTEGER},
-      key = #{record.key,jdbcType=VARCHAR},
+      uuid = #{record.uuid,jdbcType=VARCHAR},
       organization_code = #{record.organizationCode,jdbcType=VARCHAR},
       organization_name = #{record.organizationName,jdbcType=VARCHAR},
       organization_principal = #{record.organizationPrincipal,jdbcType=VARCHAR},
@@ -202,8 +202,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganization">
     update credit_organization
     <set>
-      <if test="key != null">
-        key = #{key,jdbcType=VARCHAR},
+      <if test="uuid != null">
+        uuid = #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="organizationCode != null">
         organization_code = #{organizationCode,jdbcType=VARCHAR},
@@ -261,8 +261,8 @@
       <if test="gmtCreate == null">
         GMT_CREATE,
       </if>
-      <if test="key != null">
-        key,
+      <if test="uuid != null">
+        uuid,
       </if>
       <if test="organizationCode != null">
         organization_code,
@@ -306,8 +306,8 @@
       <if test="gmtCreate == null">
         current_timestamp,
       </if>
-      <if test="key != null">
-        #{key,jdbcType=VARCHAR},
+      <if test="uuid != null">
+        #{uuid,jdbcType=VARCHAR},
       </if>
       <if test="organizationCode != null">
         #{organizationCode,jdbcType=VARCHAR},
@@ -361,8 +361,8 @@
       <if test="list[0].id!=null">
         ID,
       </if>
-      <if test="list[0].key!=null">
-        key,
+      <if test="list[0].uuid!=null">
+        uuid,
       </if>
       <if test="list[0].organizationCode!=null">
         organization_code,
@@ -395,8 +395,8 @@
         <if test="item.id!=null">
           #{item.id,jdbcType=INTEGER},
         </if>
-        <if test="item.key!=null">
-          #{item.key,jdbcType=VARCHAR},
+        <if test="item.uuid!=null">
+          #{item.uuid,jdbcType=VARCHAR},
         </if>
         <if test="item.organizationCode!=null">
           #{item.organizationCode,jdbcType=VARCHAR},
@@ -429,8 +429,8 @@
     <foreach collection="list" index="index" item="item" separator=";">
       update credit_organization
       <set>
-        <if test="item.key!=null">
-          key=#{item.key,jdbcType=VARCHAR},
+        <if test="item.uuid!=null">
+          uuid=#{item.uuid,jdbcType=VARCHAR},
         </if>
         <if test="item.organizationCode!=null">
           organization_code=#{item.organizationCode,jdbcType=VARCHAR},

@@ -172,7 +172,12 @@
 
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
-        <!--<logger name="com.nmys.view" level="debug"/>-->
+        <logger name="com.kettle.soso.mybatis.dal" level="debug" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
+        <logger name="com.kettle.soso.quartz" level="debug" additivity="false">
+            <appender-ref ref="CONSOLE"/>
+        </logger>
         <root level="info">
             <appender-ref ref="CONSOLE" />
             <!--<appender-ref ref="DEBUG_FILE" />-->
@@ -186,12 +191,30 @@
 
     <!--生产环境:输出到文件-->
     <springProfile name="pro">
+        <logger name="com.kettle.soso.mybatis.dal" level="debug" additivity="false">
+            <appender-ref ref="SQL"/>
+        </logger>
+        <logger name="com.kettle.soso.quartz" level="debug" additivity="false">
+            <appender-ref ref="SQL"/>
+        </logger>
         <root level="info">
             <appender-ref ref="INFO_FILE" />
             <appender-ref ref="ERROR_FILE" />
             <appender-ref ref="WARN_FILE" />
         </root>
     </springProfile>
+
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/sql.log</file>
+        <encoder>
+            <pattern>%-4relative [%d{yyyy-MM-dd HH:mm:ss}] [%thread] %-5level %logger{35} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>sql.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
 
 
 

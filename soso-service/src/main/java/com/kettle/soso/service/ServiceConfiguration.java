@@ -1,4 +1,4 @@
-package com.kettle.soso.service.files;
+package com.kettle.soso.service;
 
 import org.springframework.context.annotation.ComponentScan;
 

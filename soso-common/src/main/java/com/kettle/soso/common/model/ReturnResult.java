@@ -1,12 +1,15 @@
 package com.kettle.soso.common.model;
 
+import java.io.Serializable;
+
 /**
  * 结果响应对象
  * @Author: csz
  * @Date: 2018/12/19 10:47
  */
-public class ReturnResult <T> {
+public class ReturnResult <T> implements Serializable {
 
+    private static final long serialVersionUID = -2077667154407692712L;
     /**
      * result data
      */

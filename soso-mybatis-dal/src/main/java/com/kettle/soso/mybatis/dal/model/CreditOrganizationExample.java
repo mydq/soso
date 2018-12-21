@@ -387,73 +387,63 @@ public class CreditOrganizationExample extends GogoExample implements Serializab
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalIsNull() {
-            addCriterion("organization_principal is null");
+        public Criteria andFileCountIsNull() {
+            addCriterion("file_count is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalIsNotNull() {
-            addCriterion("organization_principal is not null");
+        public Criteria andFileCountIsNotNull() {
+            addCriterion("file_count is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalEqualTo(String value) {
-            addCriterion("organization_principal =", value, "organizationPrincipal");
+        public Criteria andFileCountEqualTo(Integer value) {
+            addCriterion("file_count =", value, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalNotEqualTo(String value) {
-            addCriterion("organization_principal <>", value, "organizationPrincipal");
+        public Criteria andFileCountNotEqualTo(Integer value) {
+            addCriterion("file_count <>", value, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalGreaterThan(String value) {
-            addCriterion("organization_principal >", value, "organizationPrincipal");
+        public Criteria andFileCountGreaterThan(Integer value) {
+            addCriterion("file_count >", value, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalGreaterThanOrEqualTo(String value) {
-            addCriterion("organization_principal >=", value, "organizationPrincipal");
+        public Criteria andFileCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("file_count >=", value, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalLessThan(String value) {
-            addCriterion("organization_principal <", value, "organizationPrincipal");
+        public Criteria andFileCountLessThan(Integer value) {
+            addCriterion("file_count <", value, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalLessThanOrEqualTo(String value) {
-            addCriterion("organization_principal <=", value, "organizationPrincipal");
+        public Criteria andFileCountLessThanOrEqualTo(Integer value) {
+            addCriterion("file_count <=", value, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalLike(String value) {
-            addCriterion("organization_principal like", value, "organizationPrincipal");
+        public Criteria andFileCountIn(List<Integer> values) {
+            addCriterion("file_count in", values, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalNotLike(String value) {
-            addCriterion("organization_principal not like", value, "organizationPrincipal");
+        public Criteria andFileCountNotIn(List<Integer> values) {
+            addCriterion("file_count not in", values, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalIn(List<String> values) {
-            addCriterion("organization_principal in", values, "organizationPrincipal");
+        public Criteria andFileCountBetween(Integer value1, Integer value2) {
+            addCriterion("file_count between", value1, value2, "fileCount");
             return (Criteria) this;
         }
 
-        public Criteria andOrganizationPrincipalNotIn(List<String> values) {
-            addCriterion("organization_principal not in", values, "organizationPrincipal");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationPrincipalBetween(String value1, String value2) {
-            addCriterion("organization_principal between", value1, value2, "organizationPrincipal");
-            return (Criteria) this;
-        }
-
-        public Criteria andOrganizationPrincipalNotBetween(String value1, String value2) {
-            addCriterion("organization_principal not between", value1, value2, "organizationPrincipal");
+        public Criteria andFileCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("file_count not between", value1, value2, "fileCount");
             return (Criteria) this;
         }
 

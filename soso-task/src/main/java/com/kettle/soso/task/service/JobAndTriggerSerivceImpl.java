@@ -1,9 +1,12 @@
 package com.kettle.soso.task.service;
 
 import com.kettle.soso.task.base.BaseJob;
+import org.apache.commons.collections4.CollectionUtils;
 import org.quartz.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * @Author: csz
@@ -34,14 +37,19 @@ public class JobAndTriggerSerivceImpl implements JobAndTriggerService {
 //    }
 
     @Override
-    public void addJob(String jobClassName, String jobGroupName, String cronExpression) throws Exception {
+    public void addJob(String jobClassName, String jobGroupName, String cronExpression, JobDataMap jobDataMap) throws Exception {
         // 启动调度器
         scheduler.start();
+        JobDetail jobDetail;
+        if (Objects.isNull(jobDataMap)){
+            jobDetail = JobBuilder.newJob(getClass(jobClassName).getClass())
+                    .withIdentity(jobClassName, jobGroupName).build();
+        }else {
+            // 构建job信息
+            jobDetail = JobBuilder.newJob(getClass(jobClassName).getClass()).usingJobData(jobDataMap)
+                    .withIdentity(jobClassName, jobGroupName).build();
 
-        // 构建job信息
-        JobDetail jobDetail = JobBuilder.newJob(getClass(jobClassName).getClass())
-                .withIdentity(jobClassName, jobGroupName).build();
-
+        }
         // 表达式调度构建器(即任务执行的时间)
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression);
 

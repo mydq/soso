@@ -1,5 +1,6 @@
 package com.kettle.soso.service.files;
 
+import com.kettle.soso.common.dto.UploadFileDto;
 import com.kettle.soso.mybatis.dal.model.CreditFile;
 
 /**
@@ -10,9 +11,9 @@ public interface FileAndJobService {
 
     /**
      * 文件添加
-     * @param userId
+     * @param uploadFileDto
      * @param creditFile
      */
-    void addFile(String userId, CreditFile creditFile);
+    void addFile(UploadFileDto uploadFileDto, CreditFile creditFile);
 
 }

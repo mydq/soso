@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kettle.soso.mybatis.dal.mapper.CreditOrgFileCountMapperExt">
-  <resultMap id="BaseResultMap" type="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount">
+<mapper namespace="com.kettle.soso.mybatis.dal.mapper.CreditDataTypeMapperExt">
+  <resultMap id="BaseResultMap" type="com.kettle.soso.mybatis.dal.model.CreditDataType">
     <id column="ID" jdbcType="INTEGER" property="id" />
     <result column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
-    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="data_code" jdbcType="VARCHAR" property="dataCode" />
+    <result column="data_name" jdbcType="VARCHAR" property="dataName" />
+    <result column="data_process" jdbcType="VARCHAR" property="dataProcess" />
+    <result column="default_organization" jdbcType="VARCHAR" property="defaultOrganization" />
     <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
     <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -71,17 +73,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, uuid, organization_code, count, GMT_CREATE, CREATOR, GMT_MODIFIED, MODIFIER, 
-    IS_DELETED
+    ID, uuid, data_code, data_name, data_process, default_organization, GMT_CREATE, CREATOR, 
+    GMT_MODIFIED, MODIFIER, IS_DELETED
   </sql>
-  <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCountExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditDataTypeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     <include refid="MysqlDialectPrefix" />
-    from credit_org_file_count
+    from credit_data_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -108,23 +110,23 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from credit_org_file_count
+    from credit_data_type
     where ID = #{id,jdbcType=INTEGER}
     and is_deleted = 'n'
   </select>
-  <update id="deleteByPrimaryKey" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount">
-    delete from credit_org_file_count
+  <update id="deleteByPrimaryKey" parameterType="com.kettle.soso.mybatis.dal.model.CreditDataType">
+    delete from credit_data_type
     where ID = #{id,jdbcType=INTEGER}
-    update credit_org_file_count set is_deleted = 'y',modifier=#{modifier,jdbcType=VARCHAR},gmt_Modified=current_timestamp where ID = #{id,jdbcType=BIGINT}
+    update credit_data_type set is_deleted = 'y',modifier=#{modifier,jdbcType=VARCHAR},gmt_Modified=current_timestamp where ID = #{id,jdbcType=BIGINT}
   </update>
-  <delete id="deleteByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCountExample">
-    delete from credit_org_file_count
+  <delete id="deleteByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditDataTypeExample">
+    delete from credit_data_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <select id="countByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCountExample" resultType="java.lang.Integer">
-    select count(*) from credit_org_file_count
+  <select id="countByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditDataTypeExample" resultType="java.lang.Integer">
+    select count(*) from credit_data_type
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -145,7 +147,7 @@
     <include refid="owner" />
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update credit_org_file_count
+    update credit_data_type
     <set>
       <if test="record.id != null">
         ID = #{record.id,jdbcType=INTEGER},
@@ -153,11 +155,17 @@
       <if test="record.uuid != null">
         uuid = #{record.uuid,jdbcType=VARCHAR},
       </if>
-      <if test="record.organizationCode != null">
-        organization_code = #{record.organizationCode,jdbcType=VARCHAR},
+      <if test="record.dataCode != null">
+        data_code = #{record.dataCode,jdbcType=VARCHAR},
       </if>
-      <if test="record.count != null">
-        count = #{record.count,jdbcType=INTEGER},
+      <if test="record.dataName != null">
+        data_name = #{record.dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dataProcess != null">
+        data_process = #{record.dataProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultOrganization != null">
+        default_organization = #{record.defaultOrganization,jdbcType=VARCHAR},
       </if>
       <if test="record.gmtCreate != null">
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -180,11 +188,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update credit_org_file_count
+    update credit_data_type
     set ID = #{record.id,jdbcType=INTEGER},
       uuid = #{record.uuid,jdbcType=VARCHAR},
-      organization_code = #{record.organizationCode,jdbcType=VARCHAR},
-      count = #{record.count,jdbcType=INTEGER},
+      data_code = #{record.dataCode,jdbcType=VARCHAR},
+      data_name = #{record.dataName,jdbcType=VARCHAR},
+      data_process = #{record.dataProcess,jdbcType=VARCHAR},
+      default_organization = #{record.defaultOrganization,jdbcType=VARCHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       CREATOR = #{record.creator,jdbcType=VARCHAR},
       GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
@@ -194,17 +204,23 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount">
-    update credit_org_file_count
+  <update id="updateByPrimaryKeySelective" parameterType="com.kettle.soso.mybatis.dal.model.CreditDataType">
+    update credit_data_type
     <set>
       <if test="uuid != null">
         uuid = #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="organizationCode != null">
-        organization_code = #{organizationCode,jdbcType=VARCHAR},
+      <if test="dataCode != null">
+        data_code = #{dataCode,jdbcType=VARCHAR},
       </if>
-      <if test="count != null">
-        count = #{count,jdbcType=INTEGER},
+      <if test="dataName != null">
+        data_name = #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataProcess != null">
+        data_process = #{dataProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultOrganization != null">
+        default_organization = #{defaultOrganization,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -231,11 +247,11 @@
     where ID = #{id,jdbcType=INTEGER}
     and is_deleted = 'n'
   </update>
-  <insert id="insertSelective" keyProperty="id" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrgFileCount" useGeneratedKeys="true">
+  <insert id="insertSelective" keyProperty="id" parameterType="com.kettle.soso.mybatis.dal.model.CreditDataType" useGeneratedKeys="true">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into credit_org_file_count
+    insert into credit_data_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       ID,
       <if test="isDeleted == null">
@@ -256,11 +272,17 @@
       <if test="uuid != null">
         uuid,
       </if>
-      <if test="organizationCode != null">
-        organization_code,
+      <if test="dataCode != null">
+        data_code,
       </if>
-      <if test="count != null">
-        count,
+      <if test="dataName != null">
+        data_name,
+      </if>
+      <if test="dataProcess != null">
+        data_process,
+      </if>
+      <if test="defaultOrganization != null">
+        default_organization,
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE,
@@ -298,11 +320,17 @@
       <if test="uuid != null">
         #{uuid,jdbcType=VARCHAR},
       </if>
-      <if test="organizationCode != null">
-        #{organizationCode,jdbcType=VARCHAR},
+      <if test="dataCode != null">
+        #{dataCode,jdbcType=VARCHAR},
       </if>
-      <if test="count != null">
-        #{count,jdbcType=INTEGER},
+      <if test="dataName != null">
+        #{dataName,jdbcType=VARCHAR},
+      </if>
+      <if test="dataProcess != null">
+        #{dataProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultOrganization != null">
+        #{defaultOrganization,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -323,7 +351,7 @@
   </insert>
   <sql id="MysqlDialectPrefix">
     <if test="page != null">
-      from credit_org_file_count where id in ( select id from ( select id 
+      from credit_data_type where id in ( select id from ( select id 
     </if>
   </sql>
   <sql id="MysqlDialectSuffix">
@@ -342,7 +370,7 @@
     </if>
   </sql>
   <insert id="insertBatchSelective" parameterType="java.util.List">
-    insert into credit_org_file_count
+    insert into credit_data_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="list[0].id!=null">
         ID,
@@ -350,11 +378,17 @@
       <if test="list[0].uuid!=null">
         uuid,
       </if>
-      <if test="list[0].organizationCode!=null">
-        organization_code,
+      <if test="list[0].dataCode!=null">
+        data_code,
       </if>
-      <if test="list[0].count!=null">
-        count,
+      <if test="list[0].dataName!=null">
+        data_name,
+      </if>
+      <if test="list[0].dataProcess!=null">
+        data_process,
+      </if>
+      <if test="list[0].defaultOrganization!=null">
+        default_organization,
       </if>
       <if test="list[0].gmtCreate!=null">
         GMT_CREATE,
@@ -381,11 +415,17 @@
         <if test="item.uuid!=null">
           #{item.uuid,jdbcType=VARCHAR},
         </if>
-        <if test="item.organizationCode!=null">
-          #{item.organizationCode,jdbcType=VARCHAR},
+        <if test="item.dataCode!=null">
+          #{item.dataCode,jdbcType=VARCHAR},
         </if>
-        <if test="item.count!=null">
-          #{item.count,jdbcType=INTEGER},
+        <if test="item.dataName!=null">
+          #{item.dataName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.dataProcess!=null">
+          #{item.dataProcess,jdbcType=VARCHAR},
+        </if>
+        <if test="item.defaultOrganization!=null">
+          #{item.defaultOrganization,jdbcType=VARCHAR},
         </if>
         <if test="item.gmtCreate!=null">
           #{item.gmtCreate,jdbcType=TIMESTAMP},
@@ -407,16 +447,22 @@
   </insert>
   <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
     <foreach collection="list" index="index" item="item" separator=";">
-      update credit_org_file_count
+      update credit_data_type
       <set>
         <if test="item.uuid!=null">
           uuid=#{item.uuid,jdbcType=VARCHAR},
         </if>
-        <if test="item.organizationCode!=null">
-          organization_code=#{item.organizationCode,jdbcType=VARCHAR},
+        <if test="item.dataCode!=null">
+          data_code=#{item.dataCode,jdbcType=VARCHAR},
         </if>
-        <if test="item.count!=null">
-          count=#{item.count,jdbcType=INTEGER},
+        <if test="item.dataName!=null">
+          data_name=#{item.dataName,jdbcType=VARCHAR},
+        </if>
+        <if test="item.dataProcess!=null">
+          data_process=#{item.dataProcess,jdbcType=VARCHAR},
+        </if>
+        <if test="item.defaultOrganization!=null">
+          default_organization=#{item.defaultOrganization,jdbcType=VARCHAR},
         </if>
         <if test="item.gmtCreate!=null">
           GMT_CREATE=#{item.gmtCreate,jdbcType=TIMESTAMP},

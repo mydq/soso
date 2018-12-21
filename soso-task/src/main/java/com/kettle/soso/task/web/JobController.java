@@ -21,7 +21,7 @@ public class JobController {
     public String addJob(String jobName, String groupName, String cron){
         String message = null;
         try {
-            jobAndTriggerService.addJob("com.kettle.soso.task.task.HelloWorldTask", "1", "* * * * * ?");
+            jobAndTriggerService.addJob("com.kettle.soso.task.task.HelloWorldTask", "1", "* * * * * ?",null);
             message = "success";
         }catch (Exception e){
             e.printStackTrace();

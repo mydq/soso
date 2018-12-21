@@ -170,7 +170,7 @@
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
 
-    <!--开发环境:打印控制台-->
+    <!--测试环境:打印控制台-->
     <springProfile name="dev">
         <logger name="com.kettle.soso.mybatis.dal" level="debug" additivity="false">
             <appender-ref ref="CONSOLE"/>
@@ -187,7 +187,20 @@
         </root>
     </springProfile>
 
-
+    <!--开发环境:输出到文件-->
+    <springProfile name="dev">
+        <logger name="com.kettle.soso.mybatis.dal" level="debug" additivity="false">
+            <appender-ref ref="SQL"/>
+        </logger>
+        <logger name="com.kettle.soso.quartz" level="debug" additivity="false">
+            <appender-ref ref="SQL"/>
+        </logger>
+        <root level="info">
+            <appender-ref ref="INFO_FILE" />
+            <appender-ref ref="ERROR_FILE" />
+            <appender-ref ref="WARN_FILE" />
+        </root>
+    </springProfile>
 
     <!--生产环境:输出到文件-->
     <springProfile name="pro">

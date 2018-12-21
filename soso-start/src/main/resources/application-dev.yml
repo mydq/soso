@@ -2,13 +2,13 @@ server:
   port: 8081
 logging:
   config: classpath:log/logback-spring.xml
-  path: C:/temp
+  path: /root/temp/logs
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       one:
-        url: jdbc:mysql://localhost:3306/hs_credit?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+        url: jdbc:mysql://10.32.1.170:3306/hs_credit?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
         username: root
         password: root
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -29,7 +29,7 @@ spring:
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 #通过connectProperties属性来打开mergeSql功能；慢SQL记录
         useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
       two:
-        url: jdbc:mysql://localhost:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+        url: jdbc:mysql://10.32.1.170:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
         username: root
         password: root
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -77,7 +77,7 @@ spring:
           dataSource:
             myDS:
               driver: com.mysql.cj.jdbc.Driver
-              URL: jdbc:mysql://localhost:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+              URL: jdbc:mysql://10.32.1.170:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
               user: root
               password: root
               maxConnections: 5
@@ -88,6 +88,16 @@ spring:
   #      initialize-schema: never
 
 document:
-  path: C:/temp/documents
+  path: /root/temp/documents
+kettle:
+  path: /root/kettle/data-integration/
+  repository:
+    rep: hengshui
+    user: admin
+    pass: admin
+    param:
+      one: filePath
+
+
 
 

@@ -1,0 +1,26 @@
+package com.kettle.soso.common.exceptions;
+
+/**
+ * 添加job异常
+ * @Author: csz
+ * @Date: 2018/12/19 16:22
+ */
+public class AddJobErrorException extends BaseException {
+
+    public String code = "1004";
+
+
+    public AddJobErrorException() {
+        super("job add  error");
+    }
+
+
+    public AddJobErrorException(String message) {
+        super(message);
+    }
+
+    public AddJobErrorException(String message, String code) {
+        super(message);
+        this.code = code;
+    }
+}

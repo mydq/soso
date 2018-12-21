@@ -6,7 +6,7 @@
     <result column="uuid" jdbcType="VARCHAR" property="uuid" />
     <result column="organization_code" jdbcType="VARCHAR" property="organizationCode" />
     <result column="organization_name" jdbcType="VARCHAR" property="organizationName" />
-    <result column="organization_principal" jdbcType="VARCHAR" property="organizationPrincipal" />
+    <result column="file_count" jdbcType="INTEGER" property="fileCount" />
     <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
     <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -72,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, uuid, organization_code, organization_name, organization_principal, GMT_CREATE, 
-    CREATOR, GMT_MODIFIED, MODIFIER, IS_DELETED
+    ID, uuid, organization_code, organization_name, file_count, GMT_CREATE, CREATOR, 
+    GMT_MODIFIED, MODIFIER, IS_DELETED
   </sql>
   <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditOrganizationExample" resultMap="BaseResultMap">
     select
@@ -160,8 +160,8 @@
       <if test="record.organizationName != null">
         organization_name = #{record.organizationName,jdbcType=VARCHAR},
       </if>
-      <if test="record.organizationPrincipal != null">
-        organization_principal = #{record.organizationPrincipal,jdbcType=VARCHAR},
+      <if test="record.fileCount != null">
+        file_count = #{record.fileCount,jdbcType=INTEGER},
       </if>
       <if test="record.gmtCreate != null">
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
@@ -189,7 +189,7 @@
       uuid = #{record.uuid,jdbcType=VARCHAR},
       organization_code = #{record.organizationCode,jdbcType=VARCHAR},
       organization_name = #{record.organizationName,jdbcType=VARCHAR},
-      organization_principal = #{record.organizationPrincipal,jdbcType=VARCHAR},
+      file_count = #{record.fileCount,jdbcType=INTEGER},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       CREATOR = #{record.creator,jdbcType=VARCHAR},
       GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
@@ -211,8 +211,8 @@
       <if test="organizationName != null">
         organization_name = #{organizationName,jdbcType=VARCHAR},
       </if>
-      <if test="organizationPrincipal != null">
-        organization_principal = #{organizationPrincipal,jdbcType=VARCHAR},
+      <if test="fileCount != null">
+        file_count = #{fileCount,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -270,8 +270,8 @@
       <if test="organizationName != null">
         organization_name,
       </if>
-      <if test="organizationPrincipal != null">
-        organization_principal,
+      <if test="fileCount != null">
+        file_count,
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE,
@@ -315,8 +315,8 @@
       <if test="organizationName != null">
         #{organizationName,jdbcType=VARCHAR},
       </if>
-      <if test="organizationPrincipal != null">
-        #{organizationPrincipal,jdbcType=VARCHAR},
+      <if test="fileCount != null">
+        #{fileCount,jdbcType=INTEGER},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -370,8 +370,8 @@
       <if test="list[0].organizationName!=null">
         organization_name,
       </if>
-      <if test="list[0].organizationPrincipal!=null">
-        organization_principal,
+      <if test="list[0].fileCount!=null">
+        file_count,
       </if>
       <if test="list[0].gmtCreate!=null">
         GMT_CREATE,
@@ -404,8 +404,8 @@
         <if test="item.organizationName!=null">
           #{item.organizationName,jdbcType=VARCHAR},
         </if>
-        <if test="item.organizationPrincipal!=null">
-          #{item.organizationPrincipal,jdbcType=VARCHAR},
+        <if test="item.fileCount!=null">
+          #{item.fileCount,jdbcType=INTEGER},
         </if>
         <if test="item.gmtCreate!=null">
           #{item.gmtCreate,jdbcType=TIMESTAMP},
@@ -438,8 +438,8 @@
         <if test="item.organizationName!=null">
           organization_name=#{item.organizationName,jdbcType=VARCHAR},
         </if>
-        <if test="item.organizationPrincipal!=null">
-          organization_principal=#{item.organizationPrincipal,jdbcType=VARCHAR},
+        <if test="item.fileCount!=null">
+          file_count=#{item.fileCount,jdbcType=INTEGER},
         </if>
         <if test="item.gmtCreate!=null">
           GMT_CREATE=#{item.gmtCreate,jdbcType=TIMESTAMP},

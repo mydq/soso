@@ -727,6 +727,76 @@ public class CreditFileExample extends GogoExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andDataCodeIsNull() {
+            addCriterion("data_code is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeIsNotNull() {
+            addCriterion("data_code is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeEqualTo(String value) {
+            addCriterion("data_code =", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeNotEqualTo(String value) {
+            addCriterion("data_code <>", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeGreaterThan(String value) {
+            addCriterion("data_code >", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("data_code >=", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeLessThan(String value) {
+            addCriterion("data_code <", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeLessThanOrEqualTo(String value) {
+            addCriterion("data_code <=", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeLike(String value) {
+            addCriterion("data_code like", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeNotLike(String value) {
+            addCriterion("data_code not like", value, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeIn(List<String> values) {
+            addCriterion("data_code in", values, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeNotIn(List<String> values) {
+            addCriterion("data_code not in", values, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeBetween(String value1, String value2) {
+            addCriterion("data_code between", value1, value2, "dataCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andDataCodeNotBetween(String value1, String value2) {
+            addCriterion("data_code not between", value1, value2, "dataCode");
+            return (Criteria) this;
+        }
+
         public Criteria andIdIsNull() {
             addCriterion("ID is null");
             return (Criteria) this;

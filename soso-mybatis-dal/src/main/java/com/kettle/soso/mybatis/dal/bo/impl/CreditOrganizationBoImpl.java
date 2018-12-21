@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CreditOrganizationBoImpl extends org.beans.AbstractGogoBoImpl<com.kettle.soso.mybatis.dal.model.CreditOrganization, CreditOrganizationMapperExt, com.kettle.soso.mybatis.dal.model.CreditOrganizationExample> implements CreditOrganizationBo {
@@ -31,4 +32,31 @@ public class CreditOrganizationBoImpl extends org.beans.AbstractGogoBoImpl<com.k
         List<CreditOrganization> creditOrganizations = this.mapper.selectByExample(creditOrganizationExample);
         return CollectionUtils.isNotEmpty(creditOrganizations) ? Optional.ofNullable(creditOrganizations.get(0)) : Optional.empty();
     }
+
+    /**
+     * 根据组织code查询，不存在则添加新的,存在则修改数量
+     * @param organizationCode
+     * @param organizationName
+     * @return
+     */
+    @Override
+    public void updateOrAddCountByOrganizationCode(String organizationCode, String organizationName) {
+        CreditOrganizationExample creditOrganizationExample = new CreditOrganizationExample();
+        creditOrganizationExample.createCriteria().andOrganizationCodeEqualTo(organizationCode);
+        List<CreditOrganization> creditOrganizations = this.mapper.selectByExample(creditOrganizationExample);
+        if (CollectionUtils.isEmpty(creditOrganizations)){
+            CreditOrganization creditOrganization = new CreditOrganization();
+            creditOrganization.setUuid(UUID.randomUUID().toString());
+            creditOrganization.setFileCount(1);
+            creditOrganization.setOrganizationCode(organizationCode);
+            creditOrganization.setOrganizationName(organizationName);
+            this.mapper.insertSelective(creditOrganization);
+        }else {
+            CreditOrganization creditOrganization = creditOrganizations.get(0);
+            creditOrganization.setFileCount(creditOrganization.getFileCount() + 1);
+            this.mapper.updateByPrimaryKeySelective(creditOrganization);
+        }
+    }
+
+
 }

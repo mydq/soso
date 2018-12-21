@@ -2,7 +2,7 @@ server:
   port: 8081
 logging:
   config: classpath:log/logback-spring.xml
-  path: /root/temp
+  path: C:/temp/logs
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -90,9 +90,9 @@ spring:
 document:
   path: C:/temp/documents
 kettle:
-  path: ./
+  path: D:/kettle/data-integration/
   repository:
-    rep: first_database_repository
+    rep: hengshui
     user: admin
     pass: admin
     param:

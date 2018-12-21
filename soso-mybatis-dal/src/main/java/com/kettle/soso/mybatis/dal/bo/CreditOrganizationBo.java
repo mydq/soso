@@ -15,4 +15,11 @@ public interface CreditOrganizationBo extends org.beans.GogoBo<com.kettle.soso.m
      */
     Optional<CreditOrganization> selectByOrganizationCode(String organizationCode);
 
+
+    /**
+     * 根据组织code查询，不存在则添加新的,存在则修改数量
+     * @param organizationCode
+     * @return
+     */
+    void updateOrAddCountByOrganizationCode(String organizationCode, String organizationName);
 }

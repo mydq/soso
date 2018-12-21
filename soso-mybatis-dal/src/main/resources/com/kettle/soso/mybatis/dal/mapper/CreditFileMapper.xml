@@ -11,6 +11,7 @@
     <result column="file_type" jdbcType="VARCHAR" property="fileType" />
     <result column="size" jdbcType="INTEGER" property="size" />
     <result column="verify_md5" jdbcType="VARCHAR" property="verifyMd5" />
+    <result column="data_code" jdbcType="VARCHAR" property="dataCode" />
     <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
     <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -77,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     ID, uuid, file_old_name, file_new_name, file_path, file_suffix, file_type, size, 
-    verify_md5, GMT_CREATE, CREATOR, GMT_MODIFIED, MODIFIER, IS_DELETED
+    verify_md5, data_code, GMT_CREATE, CREATOR, GMT_MODIFIED, MODIFIER, IS_DELETED
   </sql>
   <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditFileExample" resultMap="BaseResultMap">
     select
@@ -179,6 +180,9 @@
       <if test="record.verifyMd5 != null">
         verify_md5 = #{record.verifyMd5,jdbcType=VARCHAR},
       </if>
+      <if test="record.dataCode != null">
+        data_code = #{record.dataCode,jdbcType=VARCHAR},
+      </if>
       <if test="record.gmtCreate != null">
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -210,6 +214,7 @@
       file_type = #{record.fileType,jdbcType=VARCHAR},
       size = #{record.size,jdbcType=INTEGER},
       verify_md5 = #{record.verifyMd5,jdbcType=VARCHAR},
+      data_code = #{record.dataCode,jdbcType=VARCHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       CREATOR = #{record.creator,jdbcType=VARCHAR},
       GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
@@ -245,6 +250,9 @@
       </if>
       <if test="verifyMd5 != null">
         verify_md5 = #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="dataCode != null">
+        data_code = #{dataCode,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -317,6 +325,9 @@
       <if test="verifyMd5 != null">
         verify_md5,
       </if>
+      <if test="dataCode != null">
+        data_code,
+      </if>
       <if test="gmtCreate != null">
         GMT_CREATE,
       </if>
@@ -373,6 +384,9 @@
       </if>
       <if test="verifyMd5 != null">
         #{verifyMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="dataCode != null">
+        #{dataCode,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -441,6 +455,9 @@
       <if test="list[0].verifyMd5!=null">
         verify_md5,
       </if>
+      <if test="list[0].dataCode!=null">
+        data_code,
+      </if>
       <if test="list[0].gmtCreate!=null">
         GMT_CREATE,
       </if>
@@ -487,6 +504,9 @@
         <if test="item.verifyMd5!=null">
           #{item.verifyMd5,jdbcType=VARCHAR},
         </if>
+        <if test="item.dataCode!=null">
+          #{item.dataCode,jdbcType=VARCHAR},
+        </if>
         <if test="item.gmtCreate!=null">
           #{item.gmtCreate,jdbcType=TIMESTAMP},
         </if>
@@ -532,6 +552,9 @@
         </if>
         <if test="item.verifyMd5!=null">
           verify_md5=#{item.verifyMd5,jdbcType=VARCHAR},
+        </if>
+        <if test="item.dataCode!=null">
+          data_code=#{item.dataCode,jdbcType=VARCHAR},
         </if>
         <if test="item.gmtCreate!=null">
           GMT_CREATE=#{item.gmtCreate,jdbcType=TIMESTAMP},

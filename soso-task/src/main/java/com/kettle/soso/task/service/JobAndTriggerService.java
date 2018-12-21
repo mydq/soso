@@ -1,5 +1,7 @@
 package com.kettle.soso.task.service;
 
+import org.quartz.JobDataMap;
+
 /**
  * @Author: csz
  * @Date: 2018/12/18 16:59
@@ -34,7 +36,7 @@ public interface JobAndTriggerService {
      * @return void    返回类型
      * @throws
      */
-    public void addJob(String jobClassName, String jobGroupName, String cronExpression) throws Exception;
+    public void addJob(String jobClassName, String jobGroupName, String cronExpression, JobDataMap jobDataMap) throws Exception;
 
     /**
      * @Title: updateJob

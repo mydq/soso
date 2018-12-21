@@ -8,6 +8,8 @@ import com.kettle.soso.common.utils.BuildCommandUtil;
 import com.kettle.soso.common.utils.CommandUtil;
 import com.kettle.soso.common.utils.FileBean;
 import com.kettle.soso.mybatis.dal.bo.CreditDataTypeBo;
+import com.kettle.soso.mybatis.dal.model.CreditDataType;
+import com.kettle.soso.mybatis.dal.model.CreditDataTypeExample;
 import com.kettle.soso.mybatis.dal.model.CreditFile;
 import com.kettle.soso.common.dto.UploadFileDto;
 import com.kettle.soso.service.files.FileAndJobService;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -120,6 +123,10 @@ public class JobInterface {
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public ReturnResult test(UploadFileDto uploadFileDto){
         try {
+            CreditDataTypeExample creditDataTypeExample = new CreditDataTypeExample();
+            creditDataTypeExample.createCriteria().andIsDeletedEqualTo("n");
+            List<CreditDataType> creditDataTypes = creditDataTypeBo.selectByExample(creditDataTypeExample);
+            creditDataTypes.forEach(System.out::println);
             System.out.println("success");
         } catch (Exception e) {
             e.printStackTrace();

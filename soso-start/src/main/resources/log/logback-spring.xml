@@ -145,6 +145,48 @@
         </filter>
     </appender>
 
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/sql.log</file>
+        <encoder>
+            <pattern>%-4relative [%d{yyyy-MM-dd HH:mm:ss}] [%thread] %-5level %logger{35} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>sql.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+
+    <!-- 自己打印的日志文件，用于记录重要日志信息 -->
+    <!--Logger logger  =  LoggerFactory.getLogger("my_info"); logger.info("打印自己需要的日志");-->
+    <appender name="MY_INFO_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 过滤器，只打印ERROR级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <FileNamePattern>${log.path}/my_info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>15</MaxHistory>
+            <!--日志文件最大的大小-->
+            <MaxFileSize>10MB</MaxFileSize>
+        </rollingPolicy>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %logger{50} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    <logger name="my_info" additivity="true">
+        <appender-ref ref="MY_INFO_FILE"/>
+    </logger>
+
     <!--
         <logger>用来设置某一个包或者具体的某一个类的日志打印级别、
         以及指定<appender>。<logger>仅有一个name属性，
@@ -171,7 +213,7 @@
     -->
 
     <!--测试环境:打印控制台-->
-    <springProfile name="dev">
+    <springProfile name="test">
         <logger name="com.kettle.soso.mybatis.dal" level="debug" additivity="false">
             <appender-ref ref="CONSOLE"/>
         </logger>
@@ -217,46 +259,6 @@
         </root>
     </springProfile>
 
-    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/sql.log</file>
-        <encoder>
-            <pattern>%-4relative [%d{yyyy-MM-dd HH:mm:ss}] [%thread] %-5level %logger{35} - %msg%n</pattern>
-            <charset>utf8</charset>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>sql.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>7</maxHistory>
-        </rollingPolicy>
-    </appender>
 
-
-
-    <!-- 自己打印的日志文件，用于记录重要日志信息 -->
-    <!--Logger logger  =  LoggerFactory.getLogger("my_info"); logger.info("打印自己需要的日志");-->
-    <appender name="MY_INFO_FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <!-- 过滤器，只打印ERROR级别的日志 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!--日志文件输出的文件名-->
-            <FileNamePattern>${log.path}/my_info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
-            <!--日志文件保留天数-->
-            <MaxHistory>15</MaxHistory>
-            <!--日志文件最大的大小-->
-            <MaxFileSize>10MB</MaxFileSize>
-        </rollingPolicy>
-
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
-            <pattern>[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%-5level] %logger{50} - %msg%n</pattern>
-            <charset>UTF-8</charset>
-        </encoder>
-    </appender>
-    <logger name="my_info" additivity="true">
-        <appender-ref ref="MY_INFO_FILE"/>
-    </logger>
 
 </configuration>

@@ -28,7 +28,6 @@ hs_err_pid*
 
 # IntelliJ project files
 .idea
-*.iml
 out
 gen
 /.idea/libraries/
@@ -115,3 +114,4 @@ gen
 /.idea/libraries/Maven__org_slf4j_log4j_over_slf4j_1_7_25.xml
 /.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_1_1_RELEASE.xml
 /.idea/libraries/Maven__net_minidev_json_smart_2_3.xml
+

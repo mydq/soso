@@ -52,7 +52,7 @@ spring:
   jta:
     atomikos:
       properties:
-        log-base-dir: ../logs
+        log-base-dir: C:/temp/logs
     transaction-manager-id: txManager
   quartz:
     properties:

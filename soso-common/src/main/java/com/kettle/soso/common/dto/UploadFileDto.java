@@ -20,11 +20,6 @@ public class UploadFileDto {
     private String organizationCode;
 
     /**
-     * 上传者名称
-     */
-    private String organizationName;
-
-    /**
      * 定时表达式
      */
     private String expression;

@@ -22,4 +22,12 @@ public interface CreditOrganizationBo extends org.beans.GogoBo<com.kettle.soso.m
      * @return
      */
     void updateOrAddCountByOrganizationCode(String organizationCode, String organizationName);
+
+    /**
+     * 添加该组织
+     * @param organizationCode
+     * @param organizationName
+     */
+    void addAndCountByOrganizationCode(String organizationCode, String organizationName);
+
 }

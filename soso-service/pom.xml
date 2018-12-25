@@ -28,6 +28,11 @@
             <artifactId>soso-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.kettle</groupId>
+            <artifactId>soso-hs_smc</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

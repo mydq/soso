@@ -23,12 +23,12 @@ import java.sql.SQLException;
  * @Date: 2018/12/18 16:06
  */
 @Configuration
-@MapperScan(basePackages = "com.kettle.soso.quartz.mapper", sqlSessionTemplateRef = "dataSourceTwoSqlSessionTemplate")
-public class MybatisConfigTwo extends AbstractDataSourceConfig {
+@MapperScan(basePackages = "com.kettle.soso.hs_smc.mapper", sqlSessionTemplateRef = "dataSourceThreeSqlSessionTemplate")
+public class MybatisConfigThree extends AbstractDataSourceConfig {
     //对接数据库的实体层
-    static final String ALIASES_PACKAGE = "com.kettle.soso.quartz.model";
+    static final String ALIASES_PACKAGE = "com.kettle.soso.hs_smc.model";
 
-    static final String MAPPER_LOCATION = "classpath:com/kettle/soso/quartz/mapper/*.xml";
+    static final String MAPPER_LOCATION = "classpath:com/kettle/soso/hs_smc/mapper/*.xml";
 
     /**
      * 配置数据源
@@ -36,14 +36,14 @@ public class MybatisConfigTwo extends AbstractDataSourceConfig {
      * @return
      * @throws SQLException
      */
-    @Bean(name = "dataSourceTwo")
-    public DataSource dataSourceTwo(Environment environment) throws SQLException {
-        return getDataSource(environment, "spring.datasource.druid.two.", "dataSourceTwo");
+    @Bean(name = "dataSourceThree")
+    public DataSource dataSourceThree(Environment environment) throws SQLException {
+        return getDataSource(environment, "spring.datasource.druid.three.", "dataSourceThree");
     }
 
 
-    @Bean(name = "dataSourceTwoSqlSessionFactory")
-    public SqlSessionFactory dataSourceTwoSqlSessionFactory(@Qualifier("dataSourceTwo") DataSource dataSource)
+    @Bean(name = "dataSourceThreeSqlSessionFactory")
+    public SqlSessionFactory dataSourceThreeSqlSessionFactory(@Qualifier("dataSourceThree") DataSource dataSource)
             throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
@@ -53,9 +53,9 @@ public class MybatisConfigTwo extends AbstractDataSourceConfig {
     }
 
 
-    @Bean(name = "dataSourceTwoSqlSessionTemplate")
-    public SqlSessionTemplate dataSourceTwoSqlSessionTemplate(
-            @Qualifier("dataSourceTwoSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+    @Bean(name = "dataSourceThreeSqlSessionTemplate")
+    public SqlSessionTemplate dataSourceThreeSqlSessionTemplate(
+            @Qualifier("dataSourceThreeSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

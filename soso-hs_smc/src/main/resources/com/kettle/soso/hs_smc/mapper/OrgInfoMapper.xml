@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kettle.soso.hs_smc.mapper.OrgInfoMapper">
+  <resultMap id="BaseResultMap" type="com.kettle.soso.hs_smc.model.OrgInfo">
+    <id column="ORGID" jdbcType="BIGINT" property="orgid" />
+    <result column="ORGNAME" jdbcType="VARCHAR" property="orgname" />
+    <result column="ORGNO" jdbcType="VARCHAR" property="orgno" />
+    <result column="INNERNO" jdbcType="VARCHAR" property="innerno" />
+    <result column="PRINCIPAL" jdbcType="VARCHAR" property="principal" />
+    <result column="LINKMAN" jdbcType="VARCHAR" property="linkman" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="FAX" jdbcType="VARCHAR" property="fax" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="POSTCODE" jdbcType="CHAR" property="postcode" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="SUPERIORORG" jdbcType="DECIMAL" property="superiororg" />
+    <result column="VIRFLG" jdbcType="CHAR" property="virflg" />
+    <result column="STATUS" jdbcType="CHAR" property="status" />
+    <result column="TYPE" jdbcType="CHAR" property="type" />
+    <result column="EXTEND1" jdbcType="VARCHAR" property="extend1" />
+    <result column="EXTEND2" jdbcType="VARCHAR" property="extend2" />
+    <result column="EXTEND3" jdbcType="VARCHAR" property="extend3" />
+    <result column="EXTEND4" jdbcType="VARCHAR" property="extend4" />
+    <result column="EXTEND5" jdbcType="VARCHAR" property="extend5" />
+    <result column="EXTEND6" jdbcType="VARCHAR" property="extend6" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ORGID, ORGNAME, ORGNO, INNERNO, PRINCIPAL, LINKMAN, TELEPHONE, FAX, ADDRESS, POSTCODE, 
+    EMAIL, SUPERIORORG, VIRFLG, STATUS, TYPE, EXTEND1, EXTEND2, EXTEND3, EXTEND4, EXTEND5, 
+    EXTEND6
+  </sql>
+  <select id="selectByExample" parameterType="com.kettle.soso.hs_smc.model.OrgInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from org_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0">
+       limit #{limitClauseStart,jdbcType=INTEGER}, #{limitClauseCount,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from org_info
+    where ORGID = #{orgid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from org_info
+    where ORGID = #{orgid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.kettle.soso.hs_smc.model.OrgInfoExample">
+    delete from org_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.kettle.soso.hs_smc.model.OrgInfo">
+    insert into org_info (ORGID, ORGNAME, ORGNO, 
+      INNERNO, PRINCIPAL, LINKMAN, 
+      TELEPHONE, FAX, ADDRESS, 
+      POSTCODE, EMAIL, SUPERIORORG, 
+      VIRFLG, STATUS, TYPE, EXTEND1, 
+      EXTEND2, EXTEND3, EXTEND4, 
+      EXTEND5, EXTEND6)
+    values (#{orgid,jdbcType=BIGINT}, #{orgname,jdbcType=VARCHAR}, #{orgno,jdbcType=VARCHAR}, 
+      #{innerno,jdbcType=VARCHAR}, #{principal,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{fax,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{postcode,jdbcType=CHAR}, #{email,jdbcType=VARCHAR}, #{superiororg,jdbcType=DECIMAL}, 
+      #{virflg,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{type,jdbcType=CHAR}, #{extend1,jdbcType=VARCHAR}, 
+      #{extend2,jdbcType=VARCHAR}, #{extend3,jdbcType=VARCHAR}, #{extend4,jdbcType=VARCHAR}, 
+      #{extend5,jdbcType=VARCHAR}, #{extend6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kettle.soso.hs_smc.model.OrgInfo">
+    insert into org_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orgid != null">
+        ORGID,
+      </if>
+      <if test="orgname != null">
+        ORGNAME,
+      </if>
+      <if test="orgno != null">
+        ORGNO,
+      </if>
+      <if test="innerno != null">
+        INNERNO,
+      </if>
+      <if test="principal != null">
+        PRINCIPAL,
+      </if>
+      <if test="linkman != null">
+        LINKMAN,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+      <if test="fax != null">
+        FAX,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="postcode != null">
+        POSTCODE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="superiororg != null">
+        SUPERIORORG,
+      </if>
+      <if test="virflg != null">
+        VIRFLG,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="type != null">
+        TYPE,
+      </if>
+      <if test="extend1 != null">
+        EXTEND1,
+      </if>
+      <if test="extend2 != null">
+        EXTEND2,
+      </if>
+      <if test="extend3 != null">
+        EXTEND3,
+      </if>
+      <if test="extend4 != null">
+        EXTEND4,
+      </if>
+      <if test="extend5 != null">
+        EXTEND5,
+      </if>
+      <if test="extend6 != null">
+        EXTEND6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orgid != null">
+        #{orgid,jdbcType=BIGINT},
+      </if>
+      <if test="orgname != null">
+        #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgno != null">
+        #{orgno,jdbcType=VARCHAR},
+      </if>
+      <if test="innerno != null">
+        #{innerno,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        #{postcode,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="superiororg != null">
+        #{superiororg,jdbcType=DECIMAL},
+      </if>
+      <if test="virflg != null">
+        #{virflg,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=CHAR},
+      </if>
+      <if test="extend1 != null">
+        #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null">
+        #{extend5,jdbcType=VARCHAR},
+      </if>
+      <if test="extend6 != null">
+        #{extend6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.kettle.soso.hs_smc.model.OrgInfoExample" resultType="java.lang.Integer">
+    select count(*) from org_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update org_info
+    <set>
+      <if test="record.orgid != null">
+        ORGID = #{record.orgid,jdbcType=BIGINT},
+      </if>
+      <if test="record.orgname != null">
+        ORGNAME = #{record.orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orgno != null">
+        ORGNO = #{record.orgno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.innerno != null">
+        INNERNO = #{record.innerno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.principal != null">
+        PRINCIPAL = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkman != null">
+        LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null">
+        TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fax != null">
+        FAX = #{record.fax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcode != null">
+        POSTCODE = #{record.postcode,jdbcType=CHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superiororg != null">
+        SUPERIORORG = #{record.superiororg,jdbcType=DECIMAL},
+      </if>
+      <if test="record.virflg != null">
+        VIRFLG = #{record.virflg,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null">
+        TYPE = #{record.type,jdbcType=CHAR},
+      </if>
+      <if test="record.extend1 != null">
+        EXTEND1 = #{record.extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend2 != null">
+        EXTEND2 = #{record.extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend3 != null">
+        EXTEND3 = #{record.extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend4 != null">
+        EXTEND4 = #{record.extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend5 != null">
+        EXTEND5 = #{record.extend5,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extend6 != null">
+        EXTEND6 = #{record.extend6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update org_info
+    set ORGID = #{record.orgid,jdbcType=BIGINT},
+      ORGNAME = #{record.orgname,jdbcType=VARCHAR},
+      ORGNO = #{record.orgno,jdbcType=VARCHAR},
+      INNERNO = #{record.innerno,jdbcType=VARCHAR},
+      PRINCIPAL = #{record.principal,jdbcType=VARCHAR},
+      LINKMAN = #{record.linkman,jdbcType=VARCHAR},
+      TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      FAX = #{record.fax,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR},
+      POSTCODE = #{record.postcode,jdbcType=CHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      SUPERIORORG = #{record.superiororg,jdbcType=DECIMAL},
+      VIRFLG = #{record.virflg,jdbcType=CHAR},
+      STATUS = #{record.status,jdbcType=CHAR},
+      TYPE = #{record.type,jdbcType=CHAR},
+      EXTEND1 = #{record.extend1,jdbcType=VARCHAR},
+      EXTEND2 = #{record.extend2,jdbcType=VARCHAR},
+      EXTEND3 = #{record.extend3,jdbcType=VARCHAR},
+      EXTEND4 = #{record.extend4,jdbcType=VARCHAR},
+      EXTEND5 = #{record.extend5,jdbcType=VARCHAR},
+      EXTEND6 = #{record.extend6,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kettle.soso.hs_smc.model.OrgInfo">
+    update org_info
+    <set>
+      <if test="orgname != null">
+        ORGNAME = #{orgname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgno != null">
+        ORGNO = #{orgno,jdbcType=VARCHAR},
+      </if>
+      <if test="innerno != null">
+        INNERNO = #{innerno,jdbcType=VARCHAR},
+      </if>
+      <if test="principal != null">
+        PRINCIPAL = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null">
+        LINKMAN = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="fax != null">
+        FAX = #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="postcode != null">
+        POSTCODE = #{postcode,jdbcType=CHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="superiororg != null">
+        SUPERIORORG = #{superiororg,jdbcType=DECIMAL},
+      </if>
+      <if test="virflg != null">
+        VIRFLG = #{virflg,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        TYPE = #{type,jdbcType=CHAR},
+      </if>
+      <if test="extend1 != null">
+        EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="extend3 != null">
+        EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      </if>
+      <if test="extend4 != null">
+        EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      </if>
+      <if test="extend5 != null">
+        EXTEND5 = #{extend5,jdbcType=VARCHAR},
+      </if>
+      <if test="extend6 != null">
+        EXTEND6 = #{extend6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORGID = #{orgid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kettle.soso.hs_smc.model.OrgInfo">
+    update org_info
+    set ORGNAME = #{orgname,jdbcType=VARCHAR},
+      ORGNO = #{orgno,jdbcType=VARCHAR},
+      INNERNO = #{innerno,jdbcType=VARCHAR},
+      PRINCIPAL = #{principal,jdbcType=VARCHAR},
+      LINKMAN = #{linkman,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      FAX = #{fax,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      POSTCODE = #{postcode,jdbcType=CHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      SUPERIORORG = #{superiororg,jdbcType=DECIMAL},
+      VIRFLG = #{virflg,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      TYPE = #{type,jdbcType=CHAR},
+      EXTEND1 = #{extend1,jdbcType=VARCHAR},
+      EXTEND2 = #{extend2,jdbcType=VARCHAR},
+      EXTEND3 = #{extend3,jdbcType=VARCHAR},
+      EXTEND4 = #{extend4,jdbcType=VARCHAR},
+      EXTEND5 = #{extend5,jdbcType=VARCHAR},
+      EXTEND6 = #{extend6,jdbcType=VARCHAR}
+    where ORGID = #{orgid,jdbcType=BIGINT}
+  </update>
+  <insert id="insertBatchSelective" parameterType="java.util.List">
+    insert into org_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].orgid!=null">
+        ORGID,
+      </if>
+      <if test="list[0].orgname!=null">
+        ORGNAME,
+      </if>
+      <if test="list[0].orgno!=null">
+        ORGNO,
+      </if>
+      <if test="list[0].innerno!=null">
+        INNERNO,
+      </if>
+      <if test="list[0].principal!=null">
+        PRINCIPAL,
+      </if>
+      <if test="list[0].linkman!=null">
+        LINKMAN,
+      </if>
+      <if test="list[0].telephone!=null">
+        TELEPHONE,
+      </if>
+      <if test="list[0].fax!=null">
+        FAX,
+      </if>
+      <if test="list[0].address!=null">
+        ADDRESS,
+      </if>
+      <if test="list[0].postcode!=null">
+        POSTCODE,
+      </if>
+      <if test="list[0].email!=null">
+        EMAIL,
+      </if>
+      <if test="list[0].superiororg!=null">
+        SUPERIORORG,
+      </if>
+      <if test="list[0].virflg!=null">
+        VIRFLG,
+      </if>
+      <if test="list[0].status!=null">
+        STATUS,
+      </if>
+      <if test="list[0].type!=null">
+        TYPE,
+      </if>
+      <if test="list[0].extend1!=null">
+        EXTEND1,
+      </if>
+      <if test="list[0].extend2!=null">
+        EXTEND2,
+      </if>
+      <if test="list[0].extend3!=null">
+        EXTEND3,
+      </if>
+      <if test="list[0].extend4!=null">
+        EXTEND4,
+      </if>
+      <if test="list[0].extend5!=null">
+        EXTEND5,
+      </if>
+      <if test="list[0].extend6!=null">
+        EXTEND6,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.orgid!=null">
+          #{item.orgid,jdbcType=BIGINT},
+        </if>
+        <if test="item.orgname!=null">
+          #{item.orgname,jdbcType=VARCHAR},
+        </if>
+        <if test="item.orgno!=null">
+          #{item.orgno,jdbcType=VARCHAR},
+        </if>
+        <if test="item.innerno!=null">
+          #{item.innerno,jdbcType=VARCHAR},
+        </if>
+        <if test="item.principal!=null">
+          #{item.principal,jdbcType=VARCHAR},
+        </if>
+        <if test="item.linkman!=null">
+          #{item.linkman,jdbcType=VARCHAR},
+        </if>
+        <if test="item.telephone!=null">
+          #{item.telephone,jdbcType=VARCHAR},
+        </if>
+        <if test="item.fax!=null">
+          #{item.fax,jdbcType=VARCHAR},
+        </if>
+        <if test="item.address!=null">
+          #{item.address,jdbcType=VARCHAR},
+        </if>
+        <if test="item.postcode!=null">
+          #{item.postcode,jdbcType=CHAR},
+        </if>
+        <if test="item.email!=null">
+          #{item.email,jdbcType=VARCHAR},
+        </if>
+        <if test="item.superiororg!=null">
+          #{item.superiororg,jdbcType=DECIMAL},
+        </if>
+        <if test="item.virflg!=null">
+          #{item.virflg,jdbcType=CHAR},
+        </if>
+        <if test="item.status!=null">
+          #{item.status,jdbcType=CHAR},
+        </if>
+        <if test="item.type!=null">
+          #{item.type,jdbcType=CHAR},
+        </if>
+        <if test="item.extend1!=null">
+          #{item.extend1,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend2!=null">
+          #{item.extend2,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend3!=null">
+          #{item.extend3,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend4!=null">
+          #{item.extend4,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend5!=null">
+          #{item.extend5,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend6!=null">
+          #{item.extend6,jdbcType=VARCHAR},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+  <update id="updateBatchByPrimaryKeySelective" parameterType="java.util.List">
+    <foreach collection="list" index="index" item="item" separator=";">
+      update org_info
+      <set>
+        <if test="item.orgname!=null">
+          ORGNAME=#{item.orgname,jdbcType=VARCHAR},
+        </if>
+        <if test="item.orgno!=null">
+          ORGNO=#{item.orgno,jdbcType=VARCHAR},
+        </if>
+        <if test="item.innerno!=null">
+          INNERNO=#{item.innerno,jdbcType=VARCHAR},
+        </if>
+        <if test="item.principal!=null">
+          PRINCIPAL=#{item.principal,jdbcType=VARCHAR},
+        </if>
+        <if test="item.linkman!=null">
+          LINKMAN=#{item.linkman,jdbcType=VARCHAR},
+        </if>
+        <if test="item.telephone!=null">
+          TELEPHONE=#{item.telephone,jdbcType=VARCHAR},
+        </if>
+        <if test="item.fax!=null">
+          FAX=#{item.fax,jdbcType=VARCHAR},
+        </if>
+        <if test="item.address!=null">
+          ADDRESS=#{item.address,jdbcType=VARCHAR},
+        </if>
+        <if test="item.postcode!=null">
+          POSTCODE=#{item.postcode,jdbcType=CHAR},
+        </if>
+        <if test="item.email!=null">
+          EMAIL=#{item.email,jdbcType=VARCHAR},
+        </if>
+        <if test="item.superiororg!=null">
+          SUPERIORORG=#{item.superiororg,jdbcType=DECIMAL},
+        </if>
+        <if test="item.virflg!=null">
+          VIRFLG=#{item.virflg,jdbcType=CHAR},
+        </if>
+        <if test="item.status!=null">
+          STATUS=#{item.status,jdbcType=CHAR},
+        </if>
+        <if test="item.type!=null">
+          TYPE=#{item.type,jdbcType=CHAR},
+        </if>
+        <if test="item.extend1!=null">
+          EXTEND1=#{item.extend1,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend2!=null">
+          EXTEND2=#{item.extend2,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend3!=null">
+          EXTEND3=#{item.extend3,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend4!=null">
+          EXTEND4=#{item.extend4,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend5!=null">
+          EXTEND5=#{item.extend5,jdbcType=VARCHAR},
+        </if>
+        <if test="item.extend6!=null">
+          EXTEND6=#{item.extend6,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where 
+      ORGID = #{item.orgid,jdbcType=BIGINT}
+    </foreach>
+  </update>
+</mapper>

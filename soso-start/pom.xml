@@ -11,7 +11,7 @@
 
     <groupId>com.kettle</groupId>
     <artifactId>soso-start</artifactId>
-    <!--<packaging>war</packaging>-->
+    <packaging>war</packaging>
 
     <dependencies>
 
@@ -25,7 +25,6 @@
             <artifactId>soso-restful</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
 
     </dependencies>
 

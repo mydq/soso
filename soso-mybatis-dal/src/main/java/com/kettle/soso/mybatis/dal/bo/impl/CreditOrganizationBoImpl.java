@@ -45,17 +45,37 @@ public class CreditOrganizationBoImpl extends org.beans.AbstractGogoBoImpl<com.k
         creditOrganizationExample.createCriteria().andOrganizationCodeEqualTo(organizationCode);
         List<CreditOrganization> creditOrganizations = this.mapper.selectByExample(creditOrganizationExample);
         if (CollectionUtils.isEmpty(creditOrganizations)){
-            CreditOrganization creditOrganization = new CreditOrganization();
-            creditOrganization.setUuid(UUID.randomUUID().toString());
-            creditOrganization.setFileCount(1);
-            creditOrganization.setOrganizationCode(organizationCode);
-            creditOrganization.setOrganizationName(organizationName);
-            this.mapper.insertSelective(creditOrganization);
+            this.mapper.insertSelective(initThis(organizationCode, organizationName));
         }else {
             CreditOrganization creditOrganization = creditOrganizations.get(0);
             creditOrganization.setFileCount(creditOrganization.getFileCount() + 1);
             this.mapper.updateByPrimaryKeySelective(creditOrganization);
         }
+    }
+
+    /**
+     * 添加该组织
+     * @param organizationCode
+     * @param organizationName
+     */
+    @Override
+    public void addAndCountByOrganizationCode(String organizationCode, String organizationName) {
+        this.mapper.insertSelective(initThis(organizationCode, organizationName));
+    }
+
+    /**
+     * 初始化该对象
+     * @param organizationCode
+     * @param organizationName
+     * @return
+     */
+    private CreditOrganization initThis(String organizationCode, String organizationName){
+        CreditOrganization creditOrganization = new CreditOrganization();
+        creditOrganization.setUuid(UUID.randomUUID().toString());
+        creditOrganization.setFileCount(1);
+        creditOrganization.setOrganizationCode(organizationCode);
+        creditOrganization.setOrganizationName(organizationName);
+        return creditOrganization;
     }
 
 

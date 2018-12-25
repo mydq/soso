@@ -18,6 +18,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,25 +40,13 @@ import java.util.UUID;
 @RequestMapping("fileAndJob")
 public class JobInterface {
     @Autowired
+    Environment environment;
+    @Autowired
     FileAndJobService fileAndJobService;
     @Autowired
     CreditDataTypeBo creditDataTypeBo;
     @Value("${document.path}")
     String documentPath;
-    @Value("${kettle.repository.rep}")
-    String rep;
-    @Value("${kettle.repository.user}")
-    String user;
-    @Value("${kettle.repository.pass}")
-    String pass;
-    @Value("${kettle.repository.param.one}")
-    String paramOne;
-    @Value("${kettle.repository.param.two}")
-    String paramTwo;
-    @Value("${kettle.repository.param.three}")
-    String paramThree;
-    @Value("${kettle.repository.param.four}")
-    String paramFour;
     @Value("${kettle.path}")
     String kettlePath;
     @Autowired
@@ -118,15 +107,15 @@ public class JobInterface {
     public String buildCommand(UploadFileDto uploadFileDto, String filepath, String uuid){
         CreditDataType creditDataType = creditDataTypeBo.selectDataProcess(uploadFileDto.getDataCode()).orElseThrow(ProcessNotExistException::new);
         KettleModel kettleModel = new KettleModel();
-        kettleModel.setRep(rep);
-        kettleModel.setUser(user);
-        kettleModel.setPass(pass);
+        kettleModel.setRep(environment.getProperty("kettle.repository.rep"));
+        kettleModel.setUser(environment.getProperty("kettle.repository.user"));
+        kettleModel.setPass(environment.getProperty("kettle.repository.pass"));
         kettleModel.setJob(creditDataType.getDataProcess());
         Map<String, String> param = kettleModel.getParam();
-        param.put(paramTwo, creditDataType.getDefaultTransfor());
-        param.put(paramOne, filepath);
-        param.put(paramThree, uuid);
-        param.put(paramFour, uploadFileDto.getOrganizationCode());
+        param.put(environment.getProperty("kettle.repository.param.two"), creditDataType.getDefaultTransfor());
+        param.put(environment.getProperty("kettle.repository.param.one"), filepath);
+        param.put(environment.getProperty("kettle.repository.param.three"), uuid);
+        param.put(environment.getProperty("kettle.repository.param.four"), uploadFileDto.getOrganizationCode());
         return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel);
     }
 

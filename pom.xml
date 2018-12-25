@@ -11,6 +11,7 @@
         <module>soso-common</module>
         <module>soso-quartz</module>
         <module>soso-service</module>
+        <module>soso-hs_smc</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

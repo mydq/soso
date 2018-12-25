@@ -2,6 +2,7 @@ package com.kettle.soso.start;
 
 import com.kettle.soso.mybatis.dal.DruidConfiguration;
 import com.kettle.soso.mybatis.dal.MybatisConfigOne;
+import com.kettle.soso.mybatis.dal.MybatisConfigThree;
 import com.kettle.soso.mybatis.dal.MybatisConfigTwo;
 import com.kettle.soso.restful.WebConfiguration;
 import com.kettle.soso.service.ServiceConfiguration;
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @Import({MybatisConfigOne.class,
         MybatisConfigTwo.class,
+        MybatisConfigThree.class,
         DruidConfiguration.class,
         SchedulerConfig.class,
         WebConfiguration.class,

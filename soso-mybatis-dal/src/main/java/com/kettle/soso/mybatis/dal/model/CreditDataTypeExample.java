@@ -527,6 +527,76 @@ public class CreditDataTypeExample extends GogoExample implements Serializable {
             return (Criteria) this;
         }
 
+        public Criteria andDefaultTransforIsNull() {
+            addCriterion("default_transfor is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforIsNotNull() {
+            addCriterion("default_transfor is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforEqualTo(String value) {
+            addCriterion("default_transfor =", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforNotEqualTo(String value) {
+            addCriterion("default_transfor <>", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforGreaterThan(String value) {
+            addCriterion("default_transfor >", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforGreaterThanOrEqualTo(String value) {
+            addCriterion("default_transfor >=", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforLessThan(String value) {
+            addCriterion("default_transfor <", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforLessThanOrEqualTo(String value) {
+            addCriterion("default_transfor <=", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforLike(String value) {
+            addCriterion("default_transfor like", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforNotLike(String value) {
+            addCriterion("default_transfor not like", value, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforIn(List<String> values) {
+            addCriterion("default_transfor in", values, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforNotIn(List<String> values) {
+            addCriterion("default_transfor not in", values, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforBetween(String value1, String value2) {
+            addCriterion("default_transfor between", value1, value2, "defaultTransfor");
+            return (Criteria) this;
+        }
+
+        public Criteria andDefaultTransforNotBetween(String value1, String value2) {
+            addCriterion("default_transfor not between", value1, value2, "defaultTransfor");
+            return (Criteria) this;
+        }
+
         public Criteria andIdIsNull() {
             addCriterion("ID is null");
             return (Criteria) this;

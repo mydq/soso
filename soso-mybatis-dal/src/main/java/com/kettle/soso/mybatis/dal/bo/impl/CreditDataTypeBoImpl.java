@@ -27,10 +27,10 @@ public class CreditDataTypeBoImpl extends org.beans.AbstractGogoBoImpl<com.kettl
      * @return
      */
     @Override
-    public Optional<String> selectDataProcess(String dataCode) {
+    public Optional<CreditDataType> selectDataProcess(String dataCode) {
         CreditDataTypeExample creditDataTypeExample = new CreditDataTypeExample();
         creditDataTypeExample.createCriteria().andDataCodeEqualTo(dataCode);
         List<CreditDataType> creditDataTypes = this.selectByExample(creditDataTypeExample);
-        return CollectionUtils.isEmpty(creditDataTypes) ? Optional.empty() : Optional.ofNullable(creditDataTypes.get(0)).map(CreditDataType::getDataProcess);
+        return CollectionUtils.isEmpty(creditDataTypes) ? Optional.empty() : Optional.ofNullable(creditDataTypes.get(0));
     }
 }

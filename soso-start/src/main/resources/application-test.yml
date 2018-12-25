@@ -97,6 +97,7 @@ kettle:
     pass: admin
     param:
       one: filePath
+      two: tranPath
 
 
 

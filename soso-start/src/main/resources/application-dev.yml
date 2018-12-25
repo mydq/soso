@@ -97,6 +97,9 @@ kettle:
     pass: admin
     param:
       one: filePath
+      two: tranPath
+      three: uuid
+      four: orgNo
 
 
 

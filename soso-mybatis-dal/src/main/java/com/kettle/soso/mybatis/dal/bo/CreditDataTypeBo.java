@@ -13,5 +13,5 @@ public interface CreditDataTypeBo extends org.beans.GogoBo<com.kettle.soso.mybat
      * @param dataCode
      * @return
      */
-    Optional<String> selectDataProcess(String dataCode);
+    Optional<CreditDataType> selectDataProcess(String dataCode);
 }

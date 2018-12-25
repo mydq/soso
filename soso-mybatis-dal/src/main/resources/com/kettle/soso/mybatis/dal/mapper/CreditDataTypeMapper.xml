@@ -8,6 +8,7 @@
     <result column="data_name" jdbcType="VARCHAR" property="dataName" />
     <result column="data_process" jdbcType="VARCHAR" property="dataProcess" />
     <result column="default_organization" jdbcType="VARCHAR" property="defaultOrganization" />
+    <result column="default_transfor" jdbcType="VARCHAR" property="defaultTransfor" />
     <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="CREATOR" jdbcType="VARCHAR" property="creator" />
     <result column="GMT_MODIFIED" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -73,8 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    ID, uuid, data_code, data_name, data_process, default_organization, GMT_CREATE, CREATOR, 
-    GMT_MODIFIED, MODIFIER, IS_DELETED
+    ID, uuid, data_code, data_name, data_process, default_organization, default_transfor, 
+    GMT_CREATE, CREATOR, GMT_MODIFIED, MODIFIER, IS_DELETED
   </sql>
   <select id="selectByExample" parameterType="com.kettle.soso.mybatis.dal.model.CreditDataTypeExample" resultMap="BaseResultMap">
     select
@@ -167,6 +168,9 @@
       <if test="record.defaultOrganization != null">
         default_organization = #{record.defaultOrganization,jdbcType=VARCHAR},
       </if>
+      <if test="record.defaultTransfor != null">
+        default_transfor = #{record.defaultTransfor,jdbcType=VARCHAR},
+      </if>
       <if test="record.gmtCreate != null">
         GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       </if>
@@ -195,6 +199,7 @@
       data_name = #{record.dataName,jdbcType=VARCHAR},
       data_process = #{record.dataProcess,jdbcType=VARCHAR},
       default_organization = #{record.defaultOrganization,jdbcType=VARCHAR},
+      default_transfor = #{record.defaultTransfor,jdbcType=VARCHAR},
       GMT_CREATE = #{record.gmtCreate,jdbcType=TIMESTAMP},
       CREATOR = #{record.creator,jdbcType=VARCHAR},
       GMT_MODIFIED = #{record.gmtModified,jdbcType=TIMESTAMP},
@@ -221,6 +226,9 @@
       </if>
       <if test="defaultOrganization != null">
         default_organization = #{defaultOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultTransfor != null">
+        default_transfor = #{defaultTransfor,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
@@ -284,6 +292,9 @@
       <if test="defaultOrganization != null">
         default_organization,
       </if>
+      <if test="defaultTransfor != null">
+        default_transfor,
+      </if>
       <if test="gmtCreate != null">
         GMT_CREATE,
       </if>
@@ -331,6 +342,9 @@
       </if>
       <if test="defaultOrganization != null">
         #{defaultOrganization,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultTransfor != null">
+        #{defaultTransfor,jdbcType=VARCHAR},
       </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=TIMESTAMP},
@@ -390,6 +404,9 @@
       <if test="list[0].defaultOrganization!=null">
         default_organization,
       </if>
+      <if test="list[0].defaultTransfor!=null">
+        default_transfor,
+      </if>
       <if test="list[0].gmtCreate!=null">
         GMT_CREATE,
       </if>
@@ -427,6 +444,9 @@
         <if test="item.defaultOrganization!=null">
           #{item.defaultOrganization,jdbcType=VARCHAR},
         </if>
+        <if test="item.defaultTransfor!=null">
+          #{item.defaultTransfor,jdbcType=VARCHAR},
+        </if>
         <if test="item.gmtCreate!=null">
           #{item.gmtCreate,jdbcType=TIMESTAMP},
         </if>
@@ -463,6 +483,9 @@
         </if>
         <if test="item.defaultOrganization!=null">
           default_organization=#{item.defaultOrganization,jdbcType=VARCHAR},
+        </if>
+        <if test="item.defaultTransfor!=null">
+          default_transfor=#{item.defaultTransfor,jdbcType=VARCHAR},
         </if>
         <if test="item.gmtCreate!=null">
           GMT_CREATE=#{item.gmtCreate,jdbcType=TIMESTAMP},

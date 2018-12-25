@@ -52,6 +52,12 @@ public class JobInterface {
     String pass;
     @Value("${kettle.repository.param.one}")
     String paramOne;
+    @Value("${kettle.repository.param.two}")
+    String paramTwo;
+    @Value("${kettle.repository.param.three}")
+    String paramThree;
+    @Value("${kettle.repository.param.four}")
+    String paramFour;
     @Value("${kettle.path}")
     String kettlePath;
     @Autowired
@@ -80,7 +86,7 @@ public class JobInterface {
             creditFile.setSize((int)multipartFile.getSize());
             multipartFile.transferTo(new File(creditFile.getFilePath()));
             fileAndJobService.addFile(uploadFileDto, creditFile);
-            verifyRunWay(uploadFileDto, creditFile.getFilePath());
+            verifyRunWay(uploadFileDto, creditFile.getFilePath(), creditFile.getUuid());
             returnResult = new ReturnResult<>();
         }catch (BaseException e){
             returnResult = new ReturnResult<>(null, "fail", e.code, e.getMessage());
@@ -94,8 +100,8 @@ public class JobInterface {
      * 判断运行kettle的方式，定时，还是立即执行
      * @param uploadFileDto
      */
-    public void verifyRunWay(UploadFileDto uploadFileDto, String filepath){
-        String command = buildCommand(uploadFileDto, filepath);
+    public void verifyRunWay(UploadFileDto uploadFileDto, String filepath, String uuid){
+        String command = buildCommand(uploadFileDto, filepath, uuid);
         if (StringUtils.isBlank(uploadFileDto.getExpression())){
             CommandUtil.runLinuxPrint(command, false);
         }else {
@@ -109,14 +115,18 @@ public class JobInterface {
      * @param filepath
      * @return
      */
-    public String buildCommand(UploadFileDto uploadFileDto, String filepath){
+    public String buildCommand(UploadFileDto uploadFileDto, String filepath, String uuid){
+        CreditDataType creditDataType = creditDataTypeBo.selectDataProcess(uploadFileDto.getDataCode()).orElseThrow(ProcessNotExistException::new);
         KettleModel kettleModel = new KettleModel();
         kettleModel.setRep(rep);
         kettleModel.setUser(user);
         kettleModel.setPass(pass);
-        kettleModel.setJob(creditDataTypeBo.selectDataProcess(uploadFileDto.getDataCode()).orElseThrow(ProcessNotExistException::new));
+        kettleModel.setJob(creditDataType.getDataProcess());
         Map<String, String> param = kettleModel.getParam();
-        param.put(paramOne,filepath);
+        param.put(paramTwo, creditDataType.getDefaultTransfor());
+        param.put(paramOne, filepath);
+        param.put(paramThree, uuid);
+        param.put(paramFour, uploadFileDto.getOrganizationCode());
         return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel);
     }
 

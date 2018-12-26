@@ -25,6 +25,12 @@
             <artifactId>soso-restful</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <!-- provided 表明该包只在编译和测试的时候使用，去除默认的tomcat -->
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
@@ -47,10 +53,11 @@
             <!--</plugin>-->
             <!--<plugin>-->
                 <!--<artifactId>maven-war-plugin</artifactId>-->
-                <!--<version>3.0.0</version>-->
+                <!--<version>3.2.2</version>-->
                 <!--<configuration>-->
+
                     <!--&lt;!&ndash;打包后的名称&ndash;&gt;-->
-                    <!--<warName>soso-hengshui</warName>-->
+                    <!--&lt;!&ndash;<warName>soso-hengshui</warName>&ndash;&gt;-->
                     <!--<packagingExcludes>-->
                         <!--WEB-INF/lib/tomcat-embed-*.jar,-->
                         <!--WEB-INF/lib/spring-boot-starter-tomcat-*.jar-->

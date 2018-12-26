@@ -119,8 +119,11 @@ kettle:
     param:
       one: filePath
       two: tranPath
-      three: uuid
+      three: errorLog
       four: orgNo
-
+    value:
+      three: /root/temp/error_file/
+access:
+  address: cuishenzhen.cn
 
 

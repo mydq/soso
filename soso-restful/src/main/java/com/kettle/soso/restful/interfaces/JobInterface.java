@@ -61,7 +61,7 @@ public class JobInterface {
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public ReturnResult uploadFile(UploadFileDto uploadFileDto, @RequestParam("file") MultipartFile multipartFile){
-        ReturnResult<Object> returnResult = null;
+        ReturnResult<String> returnResult = null;
         try {
             String originalFilename = multipartFile.getOriginalFilename();
             CreditFile creditFile = new CreditFile();
@@ -77,6 +77,7 @@ public class JobInterface {
             fileAndJobService.addFile(uploadFileDto, creditFile);
             verifyRunWay(uploadFileDto, creditFile.getFilePath(), creditFile.getUuid());
             returnResult = new ReturnResult<>();
+            returnResult.setResult(creditFile.getUuid());
         }catch (BaseException e){
             returnResult = new ReturnResult<>(null, "fail", e.code, e.getMessage());
         } catch (Exception e) {
@@ -114,7 +115,7 @@ public class JobInterface {
         Map<String, String> param = kettleModel.getParam();
         param.put(environment.getProperty("kettle.repository.param.two"), creditDataType.getDefaultTransfor());
         param.put(environment.getProperty("kettle.repository.param.one"), filepath);
-        param.put(environment.getProperty("kettle.repository.param.three"), uuid);
+        param.put(environment.getProperty("kettle.repository.param.three"), environment.getProperty("kettle.repository.value.three")+uuid);
         param.put(environment.getProperty("kettle.repository.param.four"), uploadFileDto.getOrganizationCode());
         return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel);
     }

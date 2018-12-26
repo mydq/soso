@@ -11,6 +11,13 @@
 
     <groupId>com.kettle</groupId>
     <artifactId>soso-common</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+        </dependency>
+
+    </dependencies>
 
 
 </project>

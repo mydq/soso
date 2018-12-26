@@ -27,6 +27,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="sosocommon" />
+    <orderEntry type="library" name="Maven: com.google.zxing:core:3.3.3" level="project" />
     <orderEntry type="module" module-name="sososervice" />
     <orderEntry type="module" module-name="sosoquartz" />
     <orderEntry type="module" module-name="sosohs_smc" />

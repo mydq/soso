@@ -2,6 +2,7 @@ package com.kettle.soso.common.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.kettle.soso.common.model.FileDataModel;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -30,5 +31,10 @@ public class UploadFileDto implements Serializable {
      * 定时表达式
      */
     private String expression;
+
+    /**
+     * 文件元数据
+     */
+    private FileDataModel file;
 
 }

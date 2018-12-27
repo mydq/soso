@@ -3,6 +3,7 @@ package com.kettle.soso.restful.interfaces;
 import com.kettle.soso.common.exceptions.BaseException;
 import com.kettle.soso.common.exceptions.ProcessNotExistException;
 import com.kettle.soso.common.model.KettleModel;
+import com.kettle.soso.common.model.RequestDto;
 import com.kettle.soso.common.model.ReturnResult;
 import com.kettle.soso.common.utils.BuildCommandUtil;
 import com.kettle.soso.common.utils.CommandUtil;
@@ -14,16 +15,19 @@ import com.kettle.soso.mybatis.dal.model.CreditFile;
 import com.kettle.soso.common.dto.UploadFileDto;
 import com.kettle.soso.service.files.FileAndJobService;
 import com.kettle.soso.task.interfaces.SchedulerJobInterface;
+import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -36,6 +40,7 @@ import java.util.UUID;
  * @Author: csz
  * @Date: 2018/12/18 20:24
  */
+@Slf4j
 @RestController
 @RequestMapping("fileAndJob")
 public class JobInterface {
@@ -55,12 +60,18 @@ public class JobInterface {
 
     /**
      * 文件上传
-     * @param uploadFileDto
+     * @param requestDto
      * @param multipartFile
      * @return
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
-    public ReturnResult uploadFile(UploadFileDto uploadFileDto, @RequestParam("file") MultipartFile multipartFile){
+    public ReturnResult uploadFile(@RequestBody RequestDto<UploadFileDto> requestDto, @RequestParam("file") MultipartFile multipartFile){
+        log.info("JobInterface uploadFile requestDto = ",requestDto);
+        if (CollectionUtils.isEmpty(requestDto.getData())){
+            log.warn("JobInterface uploadFile requestDto data is empty");
+            return new ReturnResult(null, "fail","500","data is empty");
+        }
+        UploadFileDto uploadFileDto = requestDto.getData().get(0);
         ReturnResult<String> returnResult = null;
         try {
             String originalFilename = multipartFile.getOriginalFilename();

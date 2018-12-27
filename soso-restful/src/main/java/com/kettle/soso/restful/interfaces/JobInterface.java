@@ -129,6 +129,11 @@ public class JobInterface {
     }
 
 
+    /**
+     * 响应错误文件的二维码
+     * @param code
+     * @param response
+     */
     @RequestMapping(value = "/getQRCode",method = RequestMethod.GET)
     public void getQRCode(String code,HttpServletResponse response){
         log.info("JobInterface getQRCode code = {}",code);

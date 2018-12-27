@@ -27,5 +27,5 @@ public class RequestDto <T> implements Serializable {
 
     private Map<String, String> params;
 
-    private List<T> data;
+    private T data;
 }

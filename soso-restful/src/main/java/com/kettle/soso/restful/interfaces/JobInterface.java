@@ -8,6 +8,7 @@ import com.kettle.soso.common.model.ReturnResult;
 import com.kettle.soso.common.utils.BuildCommandUtil;
 import com.kettle.soso.common.utils.CommandUtil;
 import com.kettle.soso.common.utils.FileBean;
+import com.kettle.soso.common.utils.QRCodeUtil;
 import com.kettle.soso.mybatis.dal.bo.CreditDataTypeBo;
 import com.kettle.soso.mybatis.dal.model.CreditDataType;
 import com.kettle.soso.mybatis.dal.model.CreditDataTypeExample;
@@ -15,6 +16,7 @@ import com.kettle.soso.mybatis.dal.model.CreditFile;
 import com.kettle.soso.common.dto.UploadFileDto;
 import com.kettle.soso.service.files.FileAndJobService;
 import com.kettle.soso.task.interfaces.SchedulerJobInterface;
+import lombok.Cleanup;
 import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,8 @@ import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -66,12 +70,12 @@ public class JobInterface {
      */
     @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
     public ReturnResult uploadFile(@RequestBody RequestDto<UploadFileDto> requestDto, @RequestParam("file") MultipartFile multipartFile){
-        log.info("JobInterface uploadFile requestDto = ",requestDto);
-        if (CollectionUtils.isEmpty(requestDto.getData())){
+        log.info("JobInterface uploadFile requestDto = {}",requestDto);
+        if (null == requestDto.getData()){
             log.warn("JobInterface uploadFile requestDto data is empty");
             return new ReturnResult(null, "fail","500","data is empty");
         }
-        UploadFileDto uploadFileDto = requestDto.getData().get(0);
+        UploadFileDto uploadFileDto = requestDto.getData();
         ReturnResult<String> returnResult = null;
         try {
             String originalFilename = multipartFile.getOriginalFilename();
@@ -96,6 +100,23 @@ public class JobInterface {
         }
         return returnResult;
     }
+
+    @RequestMapping(value = "/getQRCode",method = RequestMethod.GET)
+    public void getQRCode(String code,HttpServletResponse response){
+        log.info("JobInterface getQRCode code = {}",code);
+        if (StringUtils.isBlank(code)){
+            log.warn("JobInterface getQRCode code is empty");
+        }
+        try {
+            String qrPath = StringUtils.join(environment.getProperty("access.address"), environment.getProperty("kettle.repository.value.three"), code, "txt");
+            response.setContentType("image/jpeg");
+            @Cleanup ServletOutputStream outputStream = response.getOutputStream();
+            QRCodeUtil.encode(qrPath, outputStream);
+        }catch (Exception e){
+            log.warn("JobInterface getQRCode error = {}",e.getMessage());
+        }
+    }
+
 
     /**
      * 判断运行kettle的方式，定时，还是立即执行

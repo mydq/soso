@@ -1,5 +1,6 @@
 package com.kettle.soso.common.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 @Data
 public class RequestDto <T> implements Serializable {
 
+    @JsonIgnore
     private static final long serialVersionUID = 7214672826389405471L;
 
     private String systemId;

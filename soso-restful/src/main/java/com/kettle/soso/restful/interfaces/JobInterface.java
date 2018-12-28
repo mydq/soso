@@ -141,7 +141,7 @@ public class JobInterface {
             log.warn("JobInterface getQRCode code is empty");
         }
         try {
-            String qrPath = StringUtils.join(environment.getProperty("access.address"), environment.getProperty("kettle.repository.value.three"), code, "txt");
+            String qrPath = StringUtils.join(environment.getProperty("access.address"), environment.getProperty("kettle.repository.value.three"), code, ".txt");
             response.setContentType("image/jpeg");
             @Cleanup ServletOutputStream outputStream = response.getOutputStream();
             QRCodeUtil.encode(qrPath, outputStream);
@@ -157,6 +157,7 @@ public class JobInterface {
      */
     public void verifyRunWay(UploadFileDto uploadFileDto, String filepath, String uuid){
         String command = buildCommand(uploadFileDto, filepath, uuid);
+        log.info("JobInterface verifyRunWay uuid = {} command = {}",uuid,command);
         if (StringUtils.isBlank(uploadFileDto.getExpression())){
             CommandUtil.runLinuxPrint(command, false);
         }else {
@@ -176,12 +177,14 @@ public class JobInterface {
         kettleModel.setRep(environment.getProperty("kettle.repository.rep"));
         kettleModel.setUser(environment.getProperty("kettle.repository.user"));
         kettleModel.setPass(environment.getProperty("kettle.repository.pass"));
+        kettleModel.setDir(environment.getProperty("kettle.repository.dir"));
         kettleModel.setJob(creditDataType.getDataProcess());
         Map<String, String> param = kettleModel.getParam();
         param.put(environment.getProperty("kettle.repository.param.two"), creditDataType.getDefaultTransfor());
         param.put(environment.getProperty("kettle.repository.param.one"), filepath);
         param.put(environment.getProperty("kettle.repository.param.three"), environment.getProperty("kettle.repository.value.three")+uuid);
         param.put(environment.getProperty("kettle.repository.param.four"), uploadFileDto.getOrganizationCode());
+        param.put(environment.getProperty("kettle.repository.param.five"), uploadFileDto.getDataCode());
         return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel);
     }
 

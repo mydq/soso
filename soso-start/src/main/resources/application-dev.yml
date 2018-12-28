@@ -113,14 +113,16 @@ document:
 kettle:
   path: /root/kettle/data-integration/
   repository:
-    rep: hengshui
+    rep: first_database_repository
     user: admin
     pass: admin
+    dir: /hengshui/
     param:
       one: filePath
       two: tranPath
-      three: errorLog
+      three: errorPath
       four: orgNo
+      five: dataCode
     value:
       three: /root/temp/error_file/
 access:

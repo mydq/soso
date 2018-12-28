@@ -1,6 +1,7 @@
 package com.kettle.soso.restful.interfaces;
 
 import com.kettle.soso.common.exceptions.BaseException;
+import com.kettle.soso.common.exceptions.LinuxCommandRunFailException;
 import com.kettle.soso.common.exceptions.ProcessNotExistException;
 import com.kettle.soso.common.model.FileDataModel;
 import com.kettle.soso.common.model.KettleModel;
@@ -159,7 +160,9 @@ public class JobInterface {
         String command = buildCommand(uploadFileDto, filepath, uuid);
         log.info("JobInterface verifyRunWay uuid = {} command = {}",uuid,command);
         if (StringUtils.isBlank(uploadFileDto.getExpression())){
-            CommandUtil.runLinuxPrint(command, false);
+            if(!CommandUtil.runLinux(command, false)){
+                throw new LinuxCommandRunFailException();
+            }
         }else {
             schedulerJobInterface.addKettleSchedulerJob(uploadFileDto.getDataCode(), command, uploadFileDto.getExpression(), false);
         }

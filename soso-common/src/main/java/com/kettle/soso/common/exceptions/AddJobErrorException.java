@@ -1,5 +1,7 @@
 package com.kettle.soso.common.exceptions;
 
+import com.kettle.soso.common.constants.ExceptionEnum;
+
 /**
  * 添加job异常
  * @Author: csz
@@ -7,7 +9,7 @@ package com.kettle.soso.common.exceptions;
  */
 public class AddJobErrorException extends BaseException {
 
-    public String code = "1004";
+    public String code = ExceptionEnum.ADD_JOB_ERROR.getCode();
 
 
     public AddJobErrorException() {

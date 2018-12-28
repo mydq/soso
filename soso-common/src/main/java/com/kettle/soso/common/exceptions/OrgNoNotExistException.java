@@ -1,5 +1,7 @@
 package com.kettle.soso.common.exceptions;
 
+import com.kettle.soso.common.constants.ExceptionEnum;
+
 /**
  * orgNo不存在异常
  * @Author: csz
@@ -7,7 +9,7 @@ package com.kettle.soso.common.exceptions;
  */
 public class OrgNoNotExistException extends BaseException {
 
-    public String code = "1005";
+    public String code = ExceptionEnum.ORGNO_NO_EXIST.getCode();
 
 
     public OrgNoNotExistException() {

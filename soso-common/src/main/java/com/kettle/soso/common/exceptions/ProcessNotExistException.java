@@ -1,5 +1,7 @@
 package com.kettle.soso.common.exceptions;
 
+import com.kettle.soso.common.constants.ExceptionEnum;
+
 /**
  * 流程不存在异常
  * @Author: csz
@@ -7,7 +9,7 @@ package com.kettle.soso.common.exceptions;
  */
 public class ProcessNotExistException extends BaseException {
 
-    public String code = "1002";
+    public String code = ExceptionEnum.PROCESS_NO_EXIST.getCode();
 
 
     public ProcessNotExistException() {

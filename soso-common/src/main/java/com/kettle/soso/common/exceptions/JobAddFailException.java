@@ -1,5 +1,7 @@
 package com.kettle.soso.common.exceptions;
 
+import com.kettle.soso.common.constants.ExceptionEnum;
+
 /**
  * 定时任务添加异常
  * @Author: csz
@@ -7,7 +9,7 @@ package com.kettle.soso.common.exceptions;
  */
 public class JobAddFailException extends BaseException {
 
-    public String code = "1003";
+    public String code = ExceptionEnum.JOB_AND_FAIL.getCode();
 
 
     public JobAddFailException() {

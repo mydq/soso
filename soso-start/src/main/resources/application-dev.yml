@@ -112,6 +112,7 @@ document:
   path: /root/temp/documents
 kettle:
   path: /root/kettle/data-integration/
+  log: /root/temp/kettle_log
   repository:
     rep: first_database_repository
     user: admin

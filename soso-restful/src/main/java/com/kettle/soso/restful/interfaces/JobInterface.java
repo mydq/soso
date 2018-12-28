@@ -185,7 +185,7 @@ public class JobInterface {
         param.put(environment.getProperty("kettle.repository.param.three"), environment.getProperty("kettle.repository.value.three")+uuid);
         param.put(environment.getProperty("kettle.repository.param.four"), uploadFileDto.getOrganizationCode());
         param.put(environment.getProperty("kettle.repository.param.five"), uploadFileDto.getDataCode());
-        return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel);
+        return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel, StringUtils.join(environment.getProperty("kettle.log"), uuid ,".log"));
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)

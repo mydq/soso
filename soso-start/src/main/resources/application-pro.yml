@@ -1,14 +1,14 @@
 server:
-  port: 8081
+  port: 8080
 logging:
   config: classpath:log/logback-spring.xml
-  path: /root/temp
+  path: /mnt/temp/soso/logs
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       one:
-        url: jdbc:mysql://localhost:3306/hs_credit?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+        url: jdbc:mysql://10.32.1.170:3306/hs_credit?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
         username: root
         password: root
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -29,7 +29,28 @@ spring:
         connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 #通过connectProperties属性来打开mergeSql功能；慢SQL记录
         useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
       two:
-        url: jdbc:mysql://localhost:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+        url: jdbc:mysql://10.32.1.170:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        initialSize: 1 #初始化连接数
+        minIdle: 3 #最小连接数
+        maxActive: 10 #最大连接数
+        maxWait: 60000 #配置获取连接等待超时的时间
+        timeBetweenEvictionRunsMillis: 30000 # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 1 #用来检测连接是否有效的sql，要求是一个查询语句。如果validationQuery为null，testOnBorrow、testOnReturn、testWhileIdle都不会其作用。
+        validationQueryTimeout: 10000
+        testWhileIdle: true #建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效。
+        testOnBorrow: false #申请连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+        testOnReturn: false #归还连接时执行validationQuery检测连接是否有效，做了这个配置会降低性能。
+        poolPreparedStatements: true #打开PSCache，并且指定每个连接上PsCache的大小
+        maxPoolPreparedStatementPerConnectionSize: 20
+        filters: stat,wall,slf4j #属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有:监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000 #通过connectProperties属性来打开mergeSql功能；慢SQL记录
+        useGlobalDataSourceStat: true # 合并多个DruidDataSource的监控数据
+      three:
+        url: jdbc:mysql://10.32.1.170:3306/hs_smc?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
         username: root
         password: root
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -52,7 +73,7 @@ spring:
   jta:
     atomikos:
       properties:
-        log-base-dir: ../logs
+        log-base-dir: /mnt/temp/soso/logs
     transaction-manager-id: txManager
   quartz:
     properties:
@@ -77,7 +98,7 @@ spring:
           dataSource:
             myDS:
               driver: com.mysql.cj.jdbc.Driver
-              URL: jdbc:mysql://localhost:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
+              URL: jdbc:mysql://10.32.1.170:3306/quartz?serverTimezone=UTC&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true
               user: root
               password: root
               maxConnections: 5
@@ -88,15 +109,25 @@ spring:
   #      initialize-schema: never
 
 document:
-  path: C:/temp/documents
+  path: /mnt/temp/soso/documents
 kettle:
-  path: ./
+  path: /mnt/kettle/data-integration/
+  log: /mnt/temp/soso/kettle_log/
   repository:
     rep: first_database_repository
     user: admin
     pass: admin
+    dir: /hengshui/
     param:
       one: filePath
+      two: tranPath
+      three: errorPath
+      four: orgNo
+      five: dataCode
+    value:
+      three: /mnt/temp/soso/error_file/
+access:
+  address: cuishenzhen.cn
 
 
 

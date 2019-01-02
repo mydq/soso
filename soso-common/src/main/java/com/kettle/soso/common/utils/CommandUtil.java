@@ -35,6 +35,30 @@ public class CommandUtil {
         return i == 0;
     }
 
+    /**
+     * 运行linux命令，不打印，返回执行状态,同时结果流给出
+     * @param command
+     * @param isShell
+     * @return
+     */
+    public static CommandResult runLinuxOut(String command, boolean isShell){
+        Process process = null;
+        CommandResult result = null;
+        int i = 99;
+        //等待命令执行完成
+        try {
+            process = run(command, isShell);
+            result = new CommandResult(process.waitFor() == 0, process.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (process != null) {
+                process.destroy();
+            }
+        }
+        return result;
+    }
+
 
     /**
      * Linux
@@ -92,6 +116,34 @@ public class CommandUtil {
         }
        return process;
     }
+
+
+    public static class CommandResult {
+        private boolean result;
+        private InputStream data;
+
+        public CommandResult(boolean result, InputStream data) {
+            this.result = result;
+            this.data = data;
+        }
+
+        public boolean isResult() {
+            return result;
+        }
+
+        public void setResult(boolean result) {
+            this.result = result;
+        }
+
+        public InputStream getData() {
+            return data;
+        }
+
+        public void setData(InputStream data) {
+            this.data = data;
+        }
+    }
+
 
 
 

@@ -2,6 +2,7 @@ package com.kettle.soso.restful.interfaces;
 
 import com.kettle.soso.common.exceptions.BaseException;
 import com.kettle.soso.common.exceptions.LinuxCommandRunFailException;
+import com.kettle.soso.common.exceptions.LogSaveErrorException;
 import com.kettle.soso.common.exceptions.ProcessNotExistException;
 import com.kettle.soso.common.model.FileDataModel;
 import com.kettle.soso.common.model.KettleModel;
@@ -23,6 +24,7 @@ import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -37,6 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -142,7 +145,7 @@ public class JobInterface {
             log.warn("JobInterface getQRCode code is empty");
         }
         try {
-            String qrPath = StringUtils.join(environment.getProperty("access.address"), environment.getProperty("kettle.repository.value.three"), code, ".txt");
+            String qrPath = StringUtils.join("http://", environment.getProperty("access.address"), environment.getProperty("kettle.repository.value.three"), code, ".txt");
             response.setContentType("image/jpeg");
             @Cleanup ServletOutputStream outputStream = response.getOutputStream();
             QRCodeUtil.encode(qrPath, outputStream);
@@ -160,8 +163,14 @@ public class JobInterface {
         String command = buildCommand(uploadFileDto, filepath, uuid);
         log.info("JobInterface verifyRunWay uuid = {} command = {}",uuid,command);
         if (StringUtils.isBlank(uploadFileDto.getExpression())){
-            if(!CommandUtil.runLinux(command, false)){
+            CommandUtil.CommandResult result = CommandUtil.runLinuxOut(command, false);
+            if(!result.isResult()){
                 throw new LinuxCommandRunFailException();
+            }
+            try {
+                FileUtils.copyInputStreamToFile(result.getData(), new File(StringUtils.join(environment.getProperty("kettle.log"), uuid ,".log")));
+            } catch (IOException e) {
+                throw new LogSaveErrorException();
             }
         }else {
             schedulerJobInterface.addKettleSchedulerJob(uploadFileDto.getDataCode(), command, uploadFileDto.getExpression(), false);
@@ -188,7 +197,7 @@ public class JobInterface {
         param.put(environment.getProperty("kettle.repository.param.three"), environment.getProperty("kettle.repository.value.three")+uuid);
         param.put(environment.getProperty("kettle.repository.param.four"), uploadFileDto.getOrganizationCode());
         param.put(environment.getProperty("kettle.repository.param.five"), uploadFileDto.getDataCode());
-        return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel, StringUtils.join(environment.getProperty("kettle.log"), uuid ,".log"));
+        return BuildCommandUtil.buildKitchenLinux(kettlePath, kettleModel);
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)

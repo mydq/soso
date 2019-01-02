@@ -17,7 +17,9 @@ public enum ExceptionEnum {
     //orgNo不存在异常
     ORGNO_NO_EXIST("1005"),
     //Linux命令运行失败
-    LINUX_COMMAND_RUN_FAIL("1006")
+    LINUX_COMMAND_RUN_FAIL("1006"),
+    //log保存错误异常
+    LOG_SAVE_ERROR("1007")
     ;
 
     private final String code;

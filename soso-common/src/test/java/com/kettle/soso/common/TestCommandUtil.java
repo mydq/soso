@@ -24,7 +24,7 @@ public class TestCommandUtil {
         param.put("file","/usr/data");
         param.put("name","hengshui");
 
-        String kitchenLinux = BuildCommandUtil.buildKitchenLinux("./", kettleModel,"");
+        String kitchenLinux = BuildCommandUtil.buildKitchenLinux("./", kettleModel);
         System.out.println(kitchenLinux);
     }
 }

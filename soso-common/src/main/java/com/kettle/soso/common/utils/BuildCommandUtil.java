@@ -22,7 +22,7 @@ public class BuildCommandUtil {
      * @param kettleModel
      * @return
      */
-    public static String buildKitchenLinux(String basePath, KettleModel kettleModel, String kettleLog) {
+    public static String buildKitchenLinux(String basePath, KettleModel kettleModel) {
         StringBuilder stringBuilder = new StringBuilder();
         try {
             stringBuilder.append(basePath).append(kettleModel.getCommand()).append(" ");
@@ -42,7 +42,6 @@ public class BuildCommandUtil {
                     }
                 }
             }
-            stringBuilder.append(" > ").append(kettleLog);
         }catch (Exception e){
             LoggerFactory.getLogger("my_info").warn("构建命令行错误",e);
         }

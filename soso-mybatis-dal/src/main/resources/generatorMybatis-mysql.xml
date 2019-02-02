@@ -70,7 +70,7 @@
 
 
 	 <!--配置要生成mybatis 相关对象的表 -->
-        <table schema="root" tableName="credit_data_type" domainObjectName="CreditDataType" >
+        <table schema="root" tableName="credit_file_status" domainObjectName="CreditFileStatus" >
         <!-- 充血模型中，Bo与Do一一对应，这里指定Bo包名，用于生成getBo方法 -->
         <property name="boPackage" value="com.kettle.soso.mybatis.dal.bo"/>
         <property name="useActualColumnNames" value="false"/>
